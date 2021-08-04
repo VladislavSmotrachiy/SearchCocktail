@@ -26,8 +26,11 @@ class TableCocktails: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let topItem = navigationController?.navigationBar.topItem {
+            topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        }
         tableView.rowHeight = 100
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = .white
         setupNavigationBar()
         setupSearchController()
         fetchData(from: URLexemples.url.rawValue + name)
@@ -49,7 +52,12 @@ class TableCocktails: UITableViewController {
     }
     
 
-
+    @IBAction func backStarterView(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+        
+        
+    }
+    
     private func fetchData(from url: String?) {
         NetworkManager.shared.fetchData(from: url) {  drink in
             self.cocktail = drink
@@ -59,21 +67,18 @@ class TableCocktails: UITableViewController {
    
     private func setupNavigationBar() {
         
-        title = name
-        navigationController?.navigationBar.prefersLargeTitles = true
         
-        // Navigation bar appearance
-        if #available(iOS 13.0, *) {
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.backgroundColor = .black
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.red]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.red]
+        let titleFont = UIFont.systemFont(ofSize: 24.0)
+            let title = name
+            let titleSize = title.size(withAttributes: [.font: titleFont])
+            let frame = CGRect(x: 0, y: 0, width: titleSize.width, height: 20.0)
+            let titleLabel = UILabel(frame: frame)
+            titleLabel.font = titleFont
+            titleLabel.textAlignment = .center
+            titleLabel.text = title
+            titleLabel.textColor = .brown
+            navigationItem.titleView = titleLabel
 
-            navigationController?.navigationBar.standardAppearance = navBarAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        }
-        
     }
 
     // MARK: - Private methods

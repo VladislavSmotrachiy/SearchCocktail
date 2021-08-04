@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="mCX-Fb-2WP">
-                                <rect key="frame" x="30" y="373.5" width="354" height="149"/>
+                                <rect key="frame" x="30" y="373" width="354" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What cocktail is for you?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZM-co-wLK">
                                         <rect key="frame" x="79" y="0.0" width="196" height="21.5"/>
@@ -31,10 +31,10 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UZx-Xx-SSK">
-                                        <rect key="frame" x="142" y="129.5" width="70" height="19.5"/>
+                                        <rect key="frame" x="142" y="129.5" width="70" height="20.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i8B-bG-3qL">
-                                                <rect key="frame" x="0.0" y="0.0" width="70" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="20.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="70" id="3ld-67-yRw"/>
                                                 </constraints>
@@ -132,7 +132,13 @@
                             <outlet property="delegate" destination="RPG-74-GUx" id="0dV-A5-0he"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="P1A-0b-drz"/>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="P1A-0b-drz">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.backward.circle" catalog="system" id="2Bc-gK-ibJ">
+                            <connections>
+                                <action selector="backStarterView:" destination="RPG-74-GUx" id="cm3-hn-CjP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qAa-so-glG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -160,6 +166,7 @@
     </scenes>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
