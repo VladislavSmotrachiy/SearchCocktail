@@ -55,7 +55,6 @@ class TableCocktails: UITableViewController {
     @IBAction func backStarterView(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
         
-        
     }
     
     private func fetchData(from url: String?) {
@@ -67,18 +66,24 @@ class TableCocktails: UITableViewController {
    
     private func setupNavigationBar() {
         
+        let title = name
+        let titleLabel = UILabel()
+        titleLabel.textAlignment = .center
+        titleLabel.text = title
+        titleLabel.textColor = .red
+        navigationItem.titleView = titleLabel
         
-        let titleFont = UIFont.systemFont(ofSize: 24.0)
-            let title = name
-            let titleSize = title.size(withAttributes: [.font: titleFont])
-            let frame = CGRect(x: 0, y: 0, width: titleSize.width, height: 20.0)
-            let titleLabel = UILabel(frame: frame)
-            titleLabel.font = titleFont
-            titleLabel.textAlignment = .center
-            titleLabel.text = title
-            titleLabel.textColor = .brown
-            navigationItem.titleView = titleLabel
+        // Navigation bar appearance
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.backgroundColor = .white
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
     }
 
     // MARK: - Private methods
@@ -89,7 +94,11 @@ class TableCocktails: UITableViewController {
         searchController.searchBar.barTintColor = .white
         navigationItem.searchController = searchController
        definesPresentationContext = true
-
+        
+        if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            textField.font = UIFont.boldSystemFont(ofSize: 17)
+            textField.textColor = .green
+        }
     }
 }
 // MARK: - UISearchResultsUpdating

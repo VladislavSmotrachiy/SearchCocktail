@@ -7,30 +7,6 @@
 
 import Foundation
 
-
-
-//struct Cocktail: Codable {
-//    let drinks: [Drinks]
-//}
-//
-//struct Drinks: Codable {
-//
-//    let dateModified: String?
-//    let idDrink: String?
-//    let strAlcoholic: String?
-//    let strCategory: String?
-//    let strCreativeCommonsConfirmed: String?
-//    let strDrink: String
-//    let strDrinkAlternate: String?
-//    let strDrinkThumb: String?
-//    let strGlass: String?
-//    let strImageAttribution: String?
-//    let strImageSource: String?
-//
-//
-//}
-
-
 struct Cocktail: Decodable{
     let drinks: [Drinks]
 }

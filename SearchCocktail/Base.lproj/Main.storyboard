@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="mCX-Fb-2WP">
-                                <rect key="frame" x="30" y="373" width="354" height="150"/>
+                                <rect key="frame" x="30" y="402" width="354" height="92.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What cocktail is for you?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZM-co-wLK">
                                         <rect key="frame" x="79" y="0.0" width="196" height="21.5"/>
@@ -25,42 +25,33 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="vAy-n4-ujK">
-                                        <rect key="frame" x="16" y="58.5" width="322" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UZx-Xx-SSK">
-                                        <rect key="frame" x="142" y="129.5" width="70" height="20.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4Fj-as-6FF">
+                                        <rect key="frame" x="32" y="58.5" width="290" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i8B-bG-3qL">
-                                                <rect key="frame" x="0.0" y="0.0" width="70" height="20.5"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="vAy-n4-ujK">
+                                                <rect key="frame" x="0.0" y="0.0" width="250" height="34"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="70" id="3ld-67-yRw"/>
+                                                    <constraint firstAttribute="width" constant="250" id="kwG-hH-dRH"/>
                                                 </constraints>
-                                                <state key="normal" image="checkmark.circle" catalog="system">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="  OK">
-                                                            <attributes>
-                                                                <color key="NSBackgroundColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
-                                                                <color key="NSColor" red="0.0" green="0.47843140360000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                <font key="NSFont" metaFont="system" size="17"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="2" tighteningFactorForTruncation="0.0"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8B-bG-3qL">
+                                                <rect key="frame" x="250" y="6" width="40" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="9xb-d8-aJc"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name=".SFNS-Regular" family=".AppleSystemUIFont" pointSize="19"/>
+                                                <state key="normal" title=" " image="checkmark.circle" catalog="system">
+                                                    <color key="titleColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="bYV-Xh-JLa" kind="show" id="Ba9-Z4-Hkz"/>
+                                                    <segue destination="bYV-Xh-JLa" kind="show" identifier="tableCocktails" id="Ba9-Z4-Hkz"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="vAy-n4-ujK" firstAttribute="leading" secondItem="mCX-Fb-2WP" secondAttribute="leading" constant="16" id="XNx-LT-Myo"/>
-                                    <constraint firstAttribute="trailing" secondItem="vAy-n4-ujK" secondAttribute="trailing" constant="16" id="buW-HM-zLl"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -80,7 +71,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1135" y="94"/>
+            <point key="canvasLocation" x="1134.7826086956522" y="93.75"/>
         </scene>
         <!--Table Cocktails-->
         <scene sceneID="n49-v0-HPH">
@@ -104,8 +95,8 @@
                                                 <constraint firstAttribute="width" constant="80" id="Khy-Qk-Coz"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiJ-Oy-q8f">
-                                            <rect key="frame" x="116" y="29.5" width="178" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiJ-Oy-q8f">
+                                            <rect key="frame" x="116" y="30" width="41.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -114,11 +105,11 @@
                                     <constraints>
                                         <constraint firstItem="pjI-9K-OXb" firstAttribute="top" secondItem="YRA-av-u1b" secondAttribute="top" id="0Sn-2l-n79"/>
                                         <constraint firstItem="KiJ-Oy-q8f" firstAttribute="centerY" secondItem="YRA-av-u1b" secondAttribute="centerY" id="6ok-a1-xk0"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KiJ-Oy-q8f" secondAttribute="trailing" constant="20" symbolic="YES" id="ObW-Ub-Tnt"/>
                                         <constraint firstItem="KiJ-Oy-q8f" firstAttribute="leading" secondItem="pjI-9K-OXb" secondAttribute="trailing" constant="20" id="XUl-0H-A8e"/>
                                         <constraint firstItem="pjI-9K-OXb" firstAttribute="centerY" secondItem="YRA-av-u1b" secondAttribute="centerY" id="lHy-lM-FdN"/>
                                         <constraint firstItem="pjI-9K-OXb" firstAttribute="leading" secondItem="YRA-av-u1b" secondAttribute="leading" constant="16" id="s5e-0k-KF6"/>
                                         <constraint firstAttribute="bottom" secondItem="pjI-9K-OXb" secondAttribute="bottom" id="wOt-bc-9jq"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="KiJ-Oy-q8f" secondAttribute="trailing" constant="100" id="xbn-dU-hTp"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -132,7 +123,7 @@
                             <outlet property="delegate" destination="RPG-74-GUx" id="0dV-A5-0he"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="P1A-0b-drz">
+                    <navigationItem key="navigationItem" id="P1A-0b-drz">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.backward.circle" catalog="system" id="2Bc-gK-ibJ">
                             <connections>
                                 <action selector="backStarterView:" destination="RPG-74-GUx" id="cm3-hn-CjP"/>
