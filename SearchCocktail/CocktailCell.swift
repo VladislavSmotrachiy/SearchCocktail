@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableCocktailCell: UITableViewCell {
+class CocktailCell: UICollectionViewCell {
     
     @IBOutlet weak var imageCocktail: CocktailImageView!{
         didSet {

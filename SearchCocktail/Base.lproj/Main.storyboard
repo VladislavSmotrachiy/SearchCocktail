@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -46,7 +47,7 @@
                                                     <color key="titleColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="bYV-Xh-JLa" kind="show" identifier="tableCocktails" id="Ba9-Z4-Hkz"/>
+                                                    <segue destination="9Yo-P4-ggH" kind="show" identifier="tableCocktails" id="YkX-Oi-Mbu"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -73,91 +74,115 @@
             </objects>
             <point key="canvasLocation" x="1134.7826086956522" y="93.75"/>
         </scene>
-        <!--Table Cocktails-->
-        <scene sceneID="n49-v0-HPH">
+        <!--Cocktails Collection Controller-->
+        <scene sceneID="Tbx-Gc-sh5">
             <objects>
-                <tableViewController modalPresentationStyle="fullScreen" id="RPG-74-GUx" customClass="TableCocktails" customModule="SearchCocktail" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6KX-Kq-an5">
+                <collectionViewController modalPresentationStyle="fullScreen" id="E45-5t-lV6" customClass="CocktailsCollectionController" customModule="SearchCocktail" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="y79-QM-rmF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="XlH-xA-tS8" customClass="TableCocktailCell" customModule="SearchCocktail" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="80"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XlH-xA-tS8" id="YRA-av-u1b">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                        <color key="tintColor" red="0.4582004677" green="0.859375" blue="0.41004995750000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xKo-QC-Fey">
+                            <size key="itemSize" width="200" height="200"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="wDM-Iw-Q4G" customClass="CocktailCell" customModule="SearchCocktail" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="30n-cL-64l">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pjI-9K-OXb" customClass="CocktailImageView" customModule="SearchCocktail" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="0.0" width="80" height="80"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="r8V-v5-z2j">
+                                            <rect key="frame" x="21" y="21" width="158.5" height="158.5"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="I40-Rh-aNZ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="158.5" height="130"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LWn-A8-Fwq" customClass="CocktailImageView" customModule="SearchCocktail" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="130" id="483-Qp-OHQ"/>
+                                                                <constraint firstAttribute="height" constant="130" id="Jbk-ji-bnF"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywb-is-KbL">
+                                                            <rect key="frame" x="138" y="49" width="20.5" height="32"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                            <state key="normal" image="suit.heart" catalog="system"/>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="md3-GB-JLw">
+                                                    <rect key="frame" x="40" y="138" width="78.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="Khy-Qk-Coz"/>
+                                                <constraint firstItem="md3-GB-JLw" firstAttribute="leading" secondItem="r8V-v5-z2j" secondAttribute="leading" constant="40" id="aXa-d2-wq4"/>
                                             </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiJ-Oy-q8f">
-                                            <rect key="frame" x="116" y="30" width="41.5" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="pjI-9K-OXb" firstAttribute="top" secondItem="YRA-av-u1b" secondAttribute="top" id="0Sn-2l-n79"/>
-                                        <constraint firstItem="KiJ-Oy-q8f" firstAttribute="centerY" secondItem="YRA-av-u1b" secondAttribute="centerY" id="6ok-a1-xk0"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KiJ-Oy-q8f" secondAttribute="trailing" constant="20" symbolic="YES" id="ObW-Ub-Tnt"/>
-                                        <constraint firstItem="KiJ-Oy-q8f" firstAttribute="leading" secondItem="pjI-9K-OXb" secondAttribute="trailing" constant="20" id="XUl-0H-A8e"/>
-                                        <constraint firstItem="pjI-9K-OXb" firstAttribute="centerY" secondItem="YRA-av-u1b" secondAttribute="centerY" id="lHy-lM-FdN"/>
-                                        <constraint firstItem="pjI-9K-OXb" firstAttribute="leading" secondItem="YRA-av-u1b" secondAttribute="leading" constant="16" id="s5e-0k-KF6"/>
-                                        <constraint firstAttribute="bottom" secondItem="pjI-9K-OXb" secondAttribute="bottom" id="wOt-bc-9jq"/>
+                                        <constraint firstItem="r8V-v5-z2j" firstAttribute="centerX" secondItem="30n-cL-64l" secondAttribute="centerX" id="5i4-CH-EFp"/>
+                                        <constraint firstItem="r8V-v5-z2j" firstAttribute="centerY" secondItem="30n-cL-64l" secondAttribute="centerY" id="AXD-oU-8NA"/>
                                     </constraints>
-                                </tableViewCellContentView>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="200" height="200"/>
                                 <connections>
-                                    <outlet property="imageCocktail" destination="pjI-9K-OXb" id="Sfp-Tb-05o"/>
-                                    <outlet property="nameCocktail" destination="KiJ-Oy-q8f" id="53q-dc-27d"/>
+                                    <outlet property="imageCocktail" destination="LWn-A8-Fwq" id="ecd-Xt-bgg"/>
+                                    <outlet property="nameCocktail" destination="md3-GB-JLw" id="evk-5h-twm"/>
                                 </connections>
-                            </tableViewCell>
-                        </prototypes>
+                            </collectionViewCell>
+                        </cells>
                         <connections>
-                            <outlet property="dataSource" destination="RPG-74-GUx" id="ZNf-QF-CDf"/>
-                            <outlet property="delegate" destination="RPG-74-GUx" id="0dV-A5-0he"/>
+                            <outlet property="dataSource" destination="E45-5t-lV6" id="KPe-8c-MMi"/>
+                            <outlet property="delegate" destination="E45-5t-lV6" id="oBe-Oh-yM1"/>
                         </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="P1A-0b-drz">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.backward.circle" catalog="system" id="2Bc-gK-ibJ">
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="fST-vy-62Y">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" image="arrowshape.turn.up.backward" catalog="system" id="cpz-WT-57w">
                             <connections>
-                                <action selector="backStarterView:" destination="RPG-74-GUx" id="cm3-hn-CjP"/>
+                                <action selector="backStarterView:" destination="E45-5t-lV6" id="QHZ-Jy-4Fp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qAa-so-glG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TUo-CK-1nw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2962.3188405797105" y="93.75"/>
+            <point key="canvasLocation" x="3163.7681159420295" y="93.75"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="v9b-cp-4pE">
+        <scene sceneID="tj6-jX-8cm">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="bYV-Xh-JLa" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="9Yo-P4-ggH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="xlP-Yp-Nwo"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wF0-Mu-aeD">
+                    <navigationItem key="navigationItem" id="jnV-nD-ndj"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AsM-Ff-Fdg">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="RPG-74-GUx" kind="relationship" relationship="rootViewController" id="YaZ-Sa-1tZ"/>
+                        <segue destination="E45-5t-lV6" kind="relationship" relationship="rootViewController" id="5lT-17-9Ka"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ev2-F5-Q6g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dyz-u8-6DV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2050.7246376811595" y="93.75"/>
+            <point key="canvasLocation" x="2099" y="94"/>
         </scene>
     </scenes>
     <resources>
+        <image name="arrowshape.turn.up.backward" catalog="system" width="128" height="106"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
-        <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
+        <image name="suit.heart" catalog="system" width="128" height="109"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

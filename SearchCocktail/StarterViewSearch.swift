@@ -31,7 +31,7 @@ class StarterViewSearch: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navigationBarController = segue.destination as? UINavigationController else { return }
-        guard let nameCocktailVC = navigationBarController.topViewController as? TableCocktails else {return}
+        guard let nameCocktailVC = navigationBarController.topViewController as? CocktailsCollectionController else {return}
         nameCocktailVC.name = nameCocktail.text ?? "old"
     }
  
