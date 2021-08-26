@@ -42,7 +42,17 @@ struct Drinks: Decodable {
     let proportionFifth: String?
     let proportionSixth: String?
     let dateModified: String?
-
+    
+    var ingredient: String {
+        """
+    1 - \( ingredientFirst ?? ""): \( proportionFirst ?? "")
+    2 - \(ingredientSecond ?? ""): \(proportionSecond ?? "")
+    3 - \(ingredientThrid ?? ""): \(proportionThrid ?? "")
+    4 - \(ingredientFourth ?? ""): \( proportionFourth ?? "")
+    5 - \(ingredientFifth ?? ""): \(proportionFifth ?? "")
+    6 - \(ingredientSixth ?? ""): \(proportionSixth ?? "")
+    """
+    }
 
     enum CodingKeys: String, CodingKey {
         case id = "idDrink"
@@ -77,7 +87,6 @@ struct Drinks: Decodable {
         case dateModified = "dateModified"
     }
 }
-
 
 enum URLexemples: String {
     case url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
