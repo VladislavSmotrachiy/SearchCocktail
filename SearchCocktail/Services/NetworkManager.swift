@@ -16,7 +16,7 @@ class NetworkManager {
     func fetchData(from url: String?, with complition: @escaping (Cocktail) -> Void) {
         guard let stringURL = url else { return }
         guard let url = URL(string: stringURL) else { return }
-
+        
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
                 print(error?.localizedDescription ?? "No error description")
@@ -30,10 +30,10 @@ class NetworkManager {
             } catch let error {
                 print(error.localizedDescription)
             }
-
+            
         }.resume()
     }
-    func fetchCharacter(from url: String, completion: @escaping(Drinks) -> Void) {
+    func fetchCharacter(from url: String, completion: @escaping(Drink) -> Void) {
         guard let url = URL(string: url) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
@@ -43,7 +43,7 @@ class NetworkManager {
             }
             
             do {
-                let result = try JSONDecoder().decode(Drinks.self, from: data)
+                let result = try JSONDecoder().decode(Drink.self, from: data)
                 DispatchQueue.main.async {
                     completion(result)
                 }
@@ -72,5 +72,5 @@ class ImageManager {
                 completion(data, response)
             }
         }.resume()
-}
+    }
 }

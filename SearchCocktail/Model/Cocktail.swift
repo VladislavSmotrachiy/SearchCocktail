@@ -8,10 +8,10 @@
 import Foundation
 
 struct Cocktail: Decodable{
-    let drinks: [Drinks]
+    let drinks: [Drink]
 }
 
-struct Drinks: Decodable {
+struct Drink: Decodable {
     let id: String?
     let nameDrink: String
     let drinkAlternate: String?
@@ -45,7 +45,7 @@ struct Drinks: Decodable {
     
     var ingredient: String {
         """
-    1 - \( ingredientFirst ?? ""): \( proportionFirst ?? "")
+    Первый ингредиент:  \(ingredientFirst ?? "")  \(proportionFirst ?? "")
     2 - \(ingredientSecond ?? ""): \(proportionSecond ?? "")
     3 - \(ingredientThrid ?? ""): \(proportionThrid ?? "")
     4 - \(ingredientFourth ?? ""): \( proportionFourth ?? "")

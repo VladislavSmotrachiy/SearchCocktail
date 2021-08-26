@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class CocktailImageView: UIImageView {
     func fetchImage(from url: String) {
         guard let imageURL = URL(string: url) else {

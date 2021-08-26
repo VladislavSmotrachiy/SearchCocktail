@@ -15,7 +15,6 @@ class StarterViewSearch: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-
         nameCocktail?.delegate = self
         nameCocktail.returnKeyType = .done
         nameCocktail.enablesReturnKeyAutomatically = true
@@ -23,18 +22,11 @@ class StarterViewSearch: UIViewController {
         button?.alpha = 0.5
     }
     
-    @objc func didTapDone() {
-        if nameCocktail.text?.count ?? 0 >= 1 {
-        performSegue(withIdentifier: "tableCocktails", sender: nil)
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navigationBarController = segue.destination as? UINavigationController else { return }
         guard let nameCocktailVC = navigationBarController.topViewController as? CocktailsCollectionController else {return}
-        nameCocktailVC.name = nameCocktail.text ?? "old"
+        nameCocktailVC.name = nameCocktail.text ?? ""
     }
- 
 }
 
 // MARK: Method for TF
@@ -46,13 +38,11 @@ extension StarterViewSearch: UITextFieldDelegate {
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.text?.count ?? 0 >= 1 {
-            nameCocktail.becomeFirstResponder()
+        if textField.text?.count ?? 0 != 0  {
             performSegue(withIdentifier: "tableCocktails", sender: nil)
         }
         return true
     }
-    
     
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
@@ -60,14 +50,13 @@ extension StarterViewSearch: UITextFieldDelegate {
         
         let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
-        if text.count >= 1 {
-            button?.isUserInteractionEnabled.toggle()
+        if text.count != 0 {
             button?.alpha = 1.0
+            button?.isUserInteractionEnabled = true
         } else {
-            button?.isUserInteractionEnabled.toggle()
             button?.alpha = 0.5
+            button?.isUserInteractionEnabled = false
         }
         return true
     }
-    
 }

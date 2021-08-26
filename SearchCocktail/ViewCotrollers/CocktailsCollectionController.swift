@@ -10,8 +10,7 @@ import UIKit
 
 class CocktailsCollectionController: UICollectionViewController {
     
-    
-    private var drinks: [Drinks] = []
+    private var drinks: [Drink] = []
     private var cocktail: Cocktail?
     private var isButtonHeart = false
     private let searchController = UISearchController(searchResultsController: nil)
@@ -25,6 +24,7 @@ class CocktailsCollectionController: UICollectionViewController {
     
     var name = ""
     var titleName = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -34,35 +34,25 @@ class CocktailsCollectionController: UICollectionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupNavigationBar(cocktail?.drinks.count ?? 0)
-       
-    }
-    
-    private func fetchData(from url: String?) {
-        NetworkManager.shared.fetchData(from: url) {  drink in
-            self.cocktail = drink
-            self.collectionView.reloadData()
-        }
-    }
-    
-    @IBAction func backStarterView(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
+        setupNavigationBar()
     }
     
     // MARK: UICollectionViewDataSource
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         isFiltering ? drinks.count : cocktail?.drinks.count ?? 0
+        isFiltering ? drinks.count : cocktail?.drinks.count ?? 0
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CocktailCell
+        
         let result = isFiltering ? drinks[indexPath.row] : cocktail?.drinks[indexPath.row]
         
         cell.configure(with: result)
         return cell
-
+        
     }
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cocktailAction =  isFiltering ? drinks[indexPath.row] : cocktail?.drinks[indexPath.row]
         
@@ -73,28 +63,37 @@ class CocktailsCollectionController: UICollectionViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
         if segue.identifier == "show" {
-           
             let character = isFiltering ? drinks[indexPath.first?.item ?? 0] : cocktail?.drinks[indexPath.first?.item ?? 0]
-           
             guard let detailVC = segue.destination as? DetailVC else { return }
             detailVC.detailsCocktail = character
-                
-            }
+            print("\(character?.nameDrink ?? "")")
         }
-        
-    @IBAction func add(_ sender: UIButton) {
-        sender.tintColor = isButtonHeart ? .red : .gray
+    }
+    
+    @IBAction func backStarterView(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
+    @IBAction func addToFavourites(_ sender: UIButton) {
+        let point = sender.convert(CGPoint.zero, to:collectionView)
+        guard let indexPath = collectionView!.indexPathForItem(at: point) else {return}
+        let character = isFiltering ? drinks[indexPath.item] : cocktail?.drinks[indexPath.item]
+
+        sender.tintColor = isButtonHeart ? .gray : .red
         isButtonHeart.toggle()
+            
+        print("\(character?.nameDrink ?? "1")")
     }
     
     
-    private func setupNavigationBar(_ count: Int) {
-        if count == 0 {
+    private func setupNavigationBar() {
+        if isFiltering ? drinks.count == 0 : cocktail?.drinks.count ?? 0 == 0 {
             titleName = "Ничего не найдено"
         } else {
-            titleName = "Поиск по '\(name)' найдено \(count) совпадений"
+            titleName = "Поиск по '\(name)' найдено \(isFiltering ? drinks.count : cocktail?.drinks.count ?? 0) совпадений"
         }
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
@@ -110,26 +109,33 @@ class CocktailsCollectionController: UICollectionViewController {
             navBarAppearance.backgroundColor = .white
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-
+            
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         }
     }
-
+    
+// MARK: - SearchController
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
         searchController.searchBar.barTintColor = .white
         navigationItem.searchController = searchController
-       definesPresentationContext = true
+        definesPresentationContext = true
         
         if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
             textField.font = UIFont.boldSystemFont(ofSize: 17)
             textField.textColor = .green
         }
     }
-
+    
+    private func fetchData(from url: String?) {
+        NetworkManager.shared.fetchData(from: url) {  drink in
+            self.cocktail = drink
+            self.collectionView.reloadData()
+        }
+    }
 }
 
 
@@ -145,29 +151,15 @@ extension CocktailsCollectionController: UISearchResultsUpdating {
         } ?? []
         collectionView.reloadData()
     }
-    
 }
-
-
-//extension CocktailsCollectionController: UISearchBarDelegate {
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//
-//        let urlString = URLexemples.url.rawValue + searchText
-//
-//        timer?.invalidate()
-//        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-//            NetworkManager.shared.fetchData(from: urlString) { cocktails in
-//                self.cocktail = cocktails
-//                self.collectionView.reloadData()
-//            }
-//
-//        })
-//
-//    }
-//}
-
+// MARK: - UICollectionViewDelegateFlowLayout
 extension CocktailsCollectionController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: UIScreen.main.bounds.width - 20 , height: 260)
+        let width = (view.frame.width - 3*16) / 2
+       return CGSize(width: width , height: width)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 16, left: 5, bottom: 16, right: 5)
+        }
 }

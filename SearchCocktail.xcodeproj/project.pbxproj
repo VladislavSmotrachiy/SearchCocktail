@@ -68,21 +68,77 @@
 		5212DC9126A9A45500EA1DF3 /* SearchCocktail */ = {
 			isa = PBXGroup;
 			children = (
-				5212DC9226A9A45500EA1DF3 /* AppDelegate.swift */,
-				52C16A2C26C5649800E5EDB1 /* CocktailsCollectionController.swift */,
-				5212DCAA26B32B5F00EA1DF3 /* NetworkManager.swift */,
-				52C16A3026CE8DB300E5EDB1 /* DetailVC.swift */,
-				5212DC9426A9A45500EA1DF3 /* SceneDelegate.swift */,
-				5212DC9626A9A45500EA1DF3 /* StarterViewSearch.swift */,
-				5212DCA626A9A47D00EA1DF3 /* Cocktail.swift */,
-				5212DC9826A9A45500EA1DF3 /* Main.storyboard */,
-				5212DCAC26B3798E00EA1DF3 /* CocktailCell.swift */,
-				5212DCAE26B37A9700EA1DF3 /* ImageCoctailView.swift */,
-				5212DC9B26A9A45700EA1DF3 /* Assets.xcassets */,
-				5212DC9D26A9A45700EA1DF3 /* LaunchScreen.storyboard */,
-				5212DCA026A9A45700EA1DF3 /* Info.plist */,
+				525151B726D817DD00F1026E /* Views */,
+				525151B826D8181500F1026E /* ViewCotrollers */,
+				525151B526D815F600F1026E /* Storyboard */,
+				525151B426D815E400F1026E /* Model */,
+				525151B926D8183E00F1026E /* Services */,
+				525151B626D8163C00F1026E /* SupportingFiles */,
+				525151BA26D8188500F1026E /* Sourse */,
 			);
 			path = SearchCocktail;
+			sourceTree = "<group>";
+		};
+		525151B426D815E400F1026E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5212DCA626A9A47D00EA1DF3 /* Cocktail.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		525151B526D815F600F1026E /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				5212DC9826A9A45500EA1DF3 /* Main.storyboard */,
+				5212DC9D26A9A45700EA1DF3 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		525151B626D8163C00F1026E /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				5212DC9426A9A45500EA1DF3 /* SceneDelegate.swift */,
+				5212DC9226A9A45500EA1DF3 /* AppDelegate.swift */,
+				5212DCA026A9A45700EA1DF3 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		525151B726D817DD00F1026E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5212DCAC26B3798E00EA1DF3 /* CocktailCell.swift */,
+				5212DCAE26B37A9700EA1DF3 /* ImageCoctailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		525151B826D8181500F1026E /* ViewCotrollers */ = {
+			isa = PBXGroup;
+			children = (
+				52C16A2C26C5649800E5EDB1 /* CocktailsCollectionController.swift */,
+				52C16A3026CE8DB300E5EDB1 /* DetailVC.swift */,
+				5212DC9626A9A45500EA1DF3 /* StarterViewSearch.swift */,
+			);
+			path = ViewCotrollers;
+			sourceTree = "<group>";
+		};
+		525151B926D8183E00F1026E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5212DCAA26B32B5F00EA1DF3 /* NetworkManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		525151BA26D8188500F1026E /* Sourse */ = {
+			isa = PBXGroup;
+			children = (
+				5212DC9B26A9A45700EA1DF3 /* Assets.xcassets */,
+			);
+			path = Sourse;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,7 +367,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SearchCocktail/Info.plist;
+				INFOPLIST_FILE = SearchCocktail/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -329,7 +385,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SearchCocktail/Info.plist;
+				INFOPLIST_FILE = SearchCocktail/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -11,13 +11,13 @@ class CocktailCell: UICollectionViewCell {
     
     @IBOutlet weak var imageCocktail: CocktailImageView!{
         didSet {
-            imageCocktail.layer.cornerRadius = imageCocktail.frame.width / 2
+            imageCocktail.layer.cornerRadius = 20
         }
     }
     
     @IBOutlet weak var nameCocktail: UILabel!
     
-    func configure(with result: Drinks?) {
+    func configure(with result: Drink?) {
         nameCocktail.text = result?.nameDrink
         imageCocktail.fetchImage(from: result?.images ?? "" )
     }
