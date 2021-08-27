@@ -10,10 +10,8 @@ import UIKit
 
 class CocktailsCollectionController: UICollectionViewController {
     
-
     private var drinks: [Drink] = []
     private var cocktail: Cocktail?
-//    private var isButtonHeart = [Int:Bool]()
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -78,13 +76,6 @@ class CocktailsCollectionController: UICollectionViewController {
         dismiss(animated: true)
     }
     
-//    @IBAction func addToFavourites(_ sender: UIButton) {
-//        let point = sender.convert(CGPoint.zero, to:collectionView)
-//        guard let indexPath = collectionView!.indexPathForItem(at: point) else {return}
-////        let character = isFiltering ? drinks[indexPath.item] : cocktail?.drinks[indexPath.item]
-//
-
-    
     private func setupNavigationBar() {
         if isFiltering ? drinks.count == 0 : cocktail?.drinks.count ?? 0 == 0 {
             titleName = "Ничего не найдено"
@@ -110,8 +101,7 @@ class CocktailsCollectionController: UICollectionViewController {
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         }
     }
-    
-// MARK: - SearchController
+    // MARK: - SearchController
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -122,7 +112,7 @@ class CocktailsCollectionController: UICollectionViewController {
         
         if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
             textField.font = UIFont.boldSystemFont(ofSize: 17)
-            textField.textColor = .green
+            textField.textColor = .darkGray
         }
     }
     
@@ -133,7 +123,6 @@ class CocktailsCollectionController: UICollectionViewController {
         }
     }
 }
-
 
 // MARK: - UISearchResultsUpdating
 extension CocktailsCollectionController: UISearchResultsUpdating {
@@ -152,10 +141,10 @@ extension CocktailsCollectionController: UISearchResultsUpdating {
 extension CocktailsCollectionController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (view.frame.width - 3*16) / 2
-       return CGSize(width: width , height: width)
+        return CGSize(width: width , height: width)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 16, left: 5, bottom: 16, right: 5)
-        }
+        UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    }
 }
