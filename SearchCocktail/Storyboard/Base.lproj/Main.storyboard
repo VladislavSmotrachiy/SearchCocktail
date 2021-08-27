@@ -119,9 +119,6 @@
                                                                 <color key="titleColor" red="0.0" green="0.16807504249999999" blue="0.99999129769999995" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                                                 <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
-                                                            <connections>
-                                                                <action selector="addToFavourites:" destination="E45-5t-lV6" eventType="touchUpInside" id="lo5-2D-I6r"/>
-                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -150,6 +147,7 @@
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="180" height="170"/>
                                 <connections>
+                                    <outlet property="addFavorites" destination="ywb-is-KbL" id="zwi-NT-X70"/>
                                     <outlet property="imageCocktail" destination="LWn-A8-Fwq" id="ecd-Xt-bgg"/>
                                     <outlet property="nameCocktail" destination="md3-GB-JLw" id="evk-5h-twm"/>
                                 </connections>
@@ -185,26 +183,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="74E-8h-vRP">
-                                <rect key="frame" x="67" y="168" width="250" height="311"/>
+                                <rect key="frame" x="50" y="106" width="275" height="435"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uuX-sq-vvj" customClass="CocktailImageView" customModule="SearchCocktail" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                                        <rect key="frame" x="12.5" y="0.0" width="250" height="250"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="250" id="09u-P0-AkX"/>
                                             <constraint firstAttribute="width" constant="250" id="uhe-aH-hcO"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ingredient" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sO-fQ-sNO">
-                                        <rect key="frame" x="10" y="284" width="230" height="27"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <rect key="frame" x="103" y="284" width="69.5" height="151"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="4sO-fQ-sNO" secondAttribute="trailing" constant="10" id="Zk7-Hr-5L1"/>
-                                    <constraint firstItem="4sO-fQ-sNO" firstAttribute="leading" secondItem="74E-8h-vRP" secondAttribute="leading" constant="10" id="hzI-tm-5lR"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4pw-3V-7XK"/>
@@ -212,8 +206,8 @@
                         <constraints>
                             <constraint firstItem="74E-8h-vRP" firstAttribute="centerX" secondItem="pUd-bY-Tqv" secondAttribute="centerX" id="U23-g9-dxQ"/>
                             <constraint firstItem="74E-8h-vRP" firstAttribute="centerY" secondItem="pUd-bY-Tqv" secondAttribute="centerY" id="ZQs-jl-NtZ"/>
-                            <constraint firstItem="74E-8h-vRP" firstAttribute="top" secondItem="4pw-3V-7XK" secondAttribute="top" constant="112" id="eRa-Cm-wCP"/>
-                            <constraint firstItem="74E-8h-vRP" firstAttribute="leading" secondItem="4pw-3V-7XK" secondAttribute="leading" constant="67" id="pXn-z9-qrj"/>
+                            <constraint firstItem="74E-8h-vRP" firstAttribute="top" secondItem="4pw-3V-7XK" secondAttribute="top" constant="50" id="eRa-Cm-wCP"/>
+                            <constraint firstItem="74E-8h-vRP" firstAttribute="leading" secondItem="4pw-3V-7XK" secondAttribute="leading" constant="50" id="pXn-z9-qrj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Let" id="XFd-XM-dBU"/>

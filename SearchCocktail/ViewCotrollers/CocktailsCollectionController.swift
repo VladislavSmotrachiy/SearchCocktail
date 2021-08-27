@@ -10,9 +10,10 @@ import UIKit
 
 class CocktailsCollectionController: UICollectionViewController {
     
+
     private var drinks: [Drink] = []
     private var cocktail: Cocktail?
-    private var isButtonHeart = false
+//    private var isButtonHeart = [Int:Bool]()
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -77,17 +78,12 @@ class CocktailsCollectionController: UICollectionViewController {
         dismiss(animated: true)
     }
     
-    @IBAction func addToFavourites(_ sender: UIButton) {
-        let point = sender.convert(CGPoint.zero, to:collectionView)
-        guard let indexPath = collectionView!.indexPathForItem(at: point) else {return}
-        let character = isFiltering ? drinks[indexPath.item] : cocktail?.drinks[indexPath.item]
+//    @IBAction func addToFavourites(_ sender: UIButton) {
+//        let point = sender.convert(CGPoint.zero, to:collectionView)
+//        guard let indexPath = collectionView!.indexPathForItem(at: point) else {return}
+////        let character = isFiltering ? drinks[indexPath.item] : cocktail?.drinks[indexPath.item]
+//
 
-        sender.tintColor = isButtonHeart ? .gray : .red
-        isButtonHeart.toggle()
-            
-        print("\(character?.nameDrink ?? "1")")
-    }
-    
     
     private func setupNavigationBar() {
         if isFiltering ? drinks.count == 0 : cocktail?.drinks.count ?? 0 == 0 {
