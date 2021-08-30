@@ -11,7 +11,7 @@ struct Cocktail: Decodable{
     let drinks: [Drink]
 }
 
-struct Drink: Decodable {
+struct Drink:  Decodable, Hashable {
     let id: String?
     let nameDrink: String
     let drinkAlternate: String?
@@ -22,12 +22,6 @@ struct Drink: Decodable {
     let alcoholic: String?
     let glass: String?
     let instructions: String?
-    let instructionsES: String?
-    let instructionsDE: String?
-    let instructionsFR: String?
-    let instructionsIT: String?
-    let instructionsZHHANS: String?
-    let instructionsZHHANT: String?
     let images: String?
     let ingredientFirst: String?
     let ingredientSecond: String?
@@ -65,12 +59,6 @@ struct Drink: Decodable {
         case alcoholic = "strAlcoholic"
         case glass = "strGlass"
         case instructions = "strInstructions"
-        case instructionsES = "strInstructionsES"
-        case instructionsDE = "strInstructionsDE"
-        case instructionsFR = "strInstructionsFR"
-        case instructionsIT = "strInstructionsIT"
-        case instructionsZHHANS = "strInstructionsZHHANS"
-        case instructionsZHHANT = "strInstructionsZHHANT"
         case images = "strDrinkThumb"
         case ingredientFirst = "strIngredient1"
         case ingredientSecond = "strIngredient2"

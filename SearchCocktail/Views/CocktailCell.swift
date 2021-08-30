@@ -22,17 +22,22 @@ class CocktailCell: UICollectionViewCell {
         nameCocktail.text = result?.nameDrink
         imageCocktail.fetchImage(from: result?.images ?? "" )
         addFavorites.addTarget(self, action: #selector(addActionFavorites), for: .touchUpInside)
-    }
     
-    @objc func addActionFavorites(_ sender: UIButton){
+    }
+    @objc func addActionFavorites(){
         if isButtonHeart {
-            sender.tintColor = .gray
+            addFavorites.tintColor = .gray
             isButtonHeart.toggle()
         } else {
-            sender.tintColor = .red
+            addFavorites.tintColor = .red
             isButtonHeart.toggle()
+            print("\(Base.shared.selected.count)")
         }
-        
-        
+   
     }
-}
+    
+    func save( result: Drink?) {
+    Base.shared.saveFavorites(id: result?.id , nameDrink: result?.nameDrink , drinkAlternate: result?.drinkAlternate ?? "", tags: result?.tags , video: result?.video , category: result?.category , IBA: result?.IBA , alcoholic: result?.alcoholic ?? "", glass: result?.glass ?? "", instructions: result?.instructions ?? "", images: result?.images ?? "",  dateModified: result?.dateModified ?? "")
+    }
+    }
+
