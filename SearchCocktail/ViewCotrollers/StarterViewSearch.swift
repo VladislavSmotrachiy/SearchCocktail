@@ -9,7 +9,6 @@ import UIKit
 
 class StarterViewSearch: UIViewController {
     
-    
     @IBOutlet weak var nameCocktail: UITextField!
     @IBOutlet weak var button: UIButton!
  
@@ -48,7 +47,6 @@ extension StarterViewSearch: UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         let text = (textField.text! as NSString).replacingCharacters(in: range,
                                                                      with: string)
-        
         if text.count != 0 {
             button?.alpha = 1.0
             button?.isUserInteractionEnabled = true

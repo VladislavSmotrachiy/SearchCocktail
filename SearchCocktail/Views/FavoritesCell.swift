@@ -16,8 +16,9 @@ class FavoritesCell: UITableViewCell {
     }
     @IBOutlet var nameFavorites: UILabel!
     
-    func configure(with result: FavoritesCocktail) {
+    func configure(with result: FavoritesCocktail){
         nameFavorites.text = result.nameDrink
         imageFavorites.fetchImage(from: result.images ?? "" )
     }
 }
+

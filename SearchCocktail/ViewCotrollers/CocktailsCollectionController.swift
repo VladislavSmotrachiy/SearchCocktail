@@ -44,7 +44,6 @@ class CocktailsCollectionController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CocktailCell
-        
         let result = isFiltering ? drinks[indexPath.row] : cocktail?.drinks[indexPath.row]
         
         cell.configure(with: result)
@@ -72,7 +71,9 @@ class CocktailsCollectionController: UICollectionViewController {
         }
     }
     
-    
+    @IBAction func buttonActionSegueOnFavorites(_ sender: Any) {
+        performSegue(withIdentifier: "showFavrites", sender: nil)
+    }
     @IBAction func backStarterView(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }

@@ -223,7 +223,11 @@
                                 <action selector="backStarterView:" destination="E45-5t-lV6" id="QHZ-Jy-4Fp"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="star" catalog="system" id="mJc-8d-0hh"/>
+                        <barButtonItem key="rightBarButtonItem" image="star" catalog="system" id="mJc-8d-0hh">
+                            <connections>
+                                <action selector="buttonActionSegueOnFavorites:" destination="E45-5t-lV6" id="kRC-EO-AHb"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="hkP-pb-g44" kind="show" identifier="show" id="OZL-gN-ND1"/>

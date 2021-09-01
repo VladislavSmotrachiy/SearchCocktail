@@ -8,7 +8,7 @@
 import Foundation
 
 struct FavoritesCocktail: Codable {
-    let nameDrink: String
+    let nameDrink: String?
     let drinkAlternate: String?
     let tags: String?
     let video: String?

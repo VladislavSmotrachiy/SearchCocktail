@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailVC: UIViewController {
-
+    
     @IBOutlet var detailImage: CocktailImageView! {
         didSet {
             detailImage.layer.cornerRadius = detailImage.frame.width / 2
@@ -16,7 +16,7 @@ class DetailVC: UIViewController {
     }
     
     @IBOutlet var ingredientCocktail: UILabel!
-
+    
     var detailsCocktail: Drink!
     
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class DetailVC: UIViewController {
         detailImage.fetchImage(from: detailsCocktail.images ?? "")
         ingredientCocktail.text = detailsCocktail.ingredient
         setupNavigationBar()
-
+        
     }
     
     private func setupNavigationBar() {

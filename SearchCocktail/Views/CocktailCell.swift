@@ -31,21 +31,21 @@ class CocktailCell: UICollectionViewCell {
             addFavorites.tintColor = .gray
             isButtonHeart.toggle()
         } else {
-            StorageManager.shared.saveFavorites(
-                nameDrink: drink?.nameDrink ,
-                drinkAlternate: drink?.drinkAlternate ?? "",
-                tags: drink?.tags ,
-                video: drink?.video ,
-                category: drink?.category ,
-                IBA: drink?.IBA ,
-                alcoholic: drink?.alcoholic ?? "",
-                glass: drink?.glass ?? "",
-                instructions: drink?.instructions ?? "",
-                images: drink?.images ?? "",
-                dateModified: drink?.dateModified ?? "")
+            let cocktail = FavoritesCocktail.init(nameDrink: drink?.nameDrink ?? "" ,
+                                                  drinkAlternate: drink?.drinkAlternate ?? "",
+                                                  tags: drink?.tags ?? "",
+                                                  video: drink?.video ?? "" ,
+                                                  category: drink?.category ?? "" ,
+                                                  IBA: drink?.IBA  ?? "",
+                                                  alcoholic: drink?.alcoholic ?? "",
+                                                  glass: drink?.glass ?? "",
+                                                  instructions: drink?.instructions ?? "",
+                                                  images: drink?.images ?? "",
+                                                  dateModified: drink?.dateModified ?? "")
+            StorageManager.shared.save(contact: cocktail)
             addFavorites.tintColor = .red
             isButtonHeart.toggle()
-            print("\(StorageManager.shared.selected.count)")
+            print("\(StorageManager.shared.fetchContacts().count)")
         }
     }
 }
