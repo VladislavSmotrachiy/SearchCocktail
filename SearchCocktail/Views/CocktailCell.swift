@@ -17,27 +17,36 @@ class CocktailCell: UICollectionViewCell {
     }
     @IBOutlet weak var nameCocktail: UILabel!
     private var isButtonHeart = false
+    private var drink: Drink?
     
     func configure(with result: Drink?) {
+        drink = result
         nameCocktail.text = result?.nameDrink
         imageCocktail.fetchImage(from: result?.images ?? "" )
         addFavorites.addTarget(self, action: #selector(addActionFavorites), for: .touchUpInside)
-    
     }
+    
     @objc func addActionFavorites(){
         if isButtonHeart {
             addFavorites.tintColor = .gray
             isButtonHeart.toggle()
         } else {
+            StorageManager.shared.saveFavorites(
+                nameDrink: drink?.nameDrink ,
+                drinkAlternate: drink?.drinkAlternate ?? "",
+                tags: drink?.tags ,
+                video: drink?.video ,
+                category: drink?.category ,
+                IBA: drink?.IBA ,
+                alcoholic: drink?.alcoholic ?? "",
+                glass: drink?.glass ?? "",
+                instructions: drink?.instructions ?? "",
+                images: drink?.images ?? "",
+                dateModified: drink?.dateModified ?? "")
             addFavorites.tintColor = .red
             isButtonHeart.toggle()
-            print("\(Base.shared.selected.count)")
+            print("\(StorageManager.shared.selected.count)")
         }
-   
     }
-    
-    func save( result: Drink?) {
-    Base.shared.saveFavorites(id: result?.id , nameDrink: result?.nameDrink , drinkAlternate: result?.drinkAlternate ?? "", tags: result?.tags , video: result?.video , category: result?.category , IBA: result?.IBA , alcoholic: result?.alcoholic ?? "", glass: result?.glass ?? "", instructions: result?.instructions ?? "", images: result?.images ?? "",  dateModified: result?.dateModified ?? "")
-    }
-    }
+}
 
