@@ -51,6 +51,7 @@
                                 <connections>
                                     <outlet property="imageFavorites" destination="btN-Sj-ptv" id="liY-s6-j7I"/>
                                     <outlet property="nameFavorites" destination="C6r-jL-gif" id="JRO-Vu-mtI"/>
+                                    <segue destination="M9h-Zp-izo" kind="show" id="3uO-hm-qKI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -64,7 +65,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpr-mo-wAC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4597.6000000000004" y="-820.83958020989508"/>
+            <point key="canvasLocation" x="4639" y="-852"/>
         </scene>
         <!--Search-->
         <scene sceneID="tne-QT-ifu">
@@ -230,59 +231,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="hkP-pb-g44" kind="show" identifier="show" id="OZL-gN-ND1"/>
-                        <segue destination="bwK-dB-tMp" kind="show" identifier="showFavrites" id="NCK-xB-CvI"/>
+                        <segue destination="bwK-dB-tMp" kind="show" identifier="showFavorites" id="NCK-xB-CvI"/>
+                        <segue destination="M9h-Zp-izo" kind="show" identifier="show" id="INx-yq-iZV"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TUo-CK-1nw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3820" y="92.203898050974516"/>
-        </scene>
-        <!--Let-->
-        <scene sceneID="5b7-wu-09u">
-            <objects>
-                <viewController id="hkP-pb-g44" customClass="DetailVC" customModule="SearchCocktail" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="pUd-bY-Tqv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="74E-8h-vRP">
-                                <rect key="frame" x="50" y="106" width="275" height="435"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uuX-sq-vvj" customClass="CocktailImageView" customModule="SearchCocktail" customModuleProvider="target">
-                                        <rect key="frame" x="12.5" y="0.0" width="250" height="250"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="250" id="09u-P0-AkX"/>
-                                            <constraint firstAttribute="width" constant="250" id="uhe-aH-hcO"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ingredient" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sO-fQ-sNO">
-                                        <rect key="frame" x="103" y="284" width="69.5" height="151"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="4pw-3V-7XK"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="74E-8h-vRP" firstAttribute="centerX" secondItem="pUd-bY-Tqv" secondAttribute="centerX" id="U23-g9-dxQ"/>
-                            <constraint firstItem="74E-8h-vRP" firstAttribute="centerY" secondItem="pUd-bY-Tqv" secondAttribute="centerY" id="ZQs-jl-NtZ"/>
-                            <constraint firstItem="74E-8h-vRP" firstAttribute="top" secondItem="4pw-3V-7XK" secondAttribute="top" constant="50" id="eRa-Cm-wCP"/>
-                            <constraint firstItem="74E-8h-vRP" firstAttribute="leading" secondItem="4pw-3V-7XK" secondAttribute="leading" constant="50" id="pXn-z9-qrj"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Let" id="XFd-XM-dBU"/>
-                    <connections>
-                        <outlet property="detailImage" destination="uuX-sq-vvj" id="fkA-04-SQU"/>
-                        <outlet property="ingredientCocktail" destination="4sO-fQ-sNO" id="t6K-W4-vkf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RDO-h4-h89" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4639.1999999999998" y="92.203898050974516"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tj6-jX-8cm">
@@ -324,8 +279,185 @@
             </objects>
             <point key="canvasLocation" x="1133.5999999999999" y="93.103448275862078"/>
         </scene>
+        <!--DetailVC-->
+        <scene sceneID="MJa-YX-UbX">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="M9h-Zp-izo" customClass="DetailVC" customModule="SearchCocktail" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6gr-5W-Rms">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1380"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfA-M9-qUA">
+                                <rect key="frame" x="12" y="416" width="390" height="944"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="xrX-Je-lgb">
+                                        <rect key="frame" x="20" y="15" width="350" height="888.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ингридиенты" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbE-2G-dnE">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="23"/>
+                                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
+                                                <color key="textColor" red="1" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1s-E8-bsT">
+                                                <rect key="frame" x="0.0" y="49" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRb-wn-nZk">
+                                                <rect key="frame" x="0.0" y="100.5" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMg-tB-dKg">
+                                                <rect key="frame" x="0.0" y="152" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yc0-Kr-nxV">
+                                                <rect key="frame" x="0.0" y="203.5" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8JD-ck-ydp">
+                                                <rect key="frame" x="0.0" y="255" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTx-8o-kPM">
+                                                <rect key="frame" x="0.0" y="306.5" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Метод" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shd-L2-emi">
+                                                <rect key="frame" x="0.0" y="358" width="350" height="23"/>
+                                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
+                                                <color key="textColor" red="1" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IB-I8-L1K">
+                                                <rect key="frame" x="0.0" y="407" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="St1-kN-y80">
+                                                <rect key="frame" x="0.0" y="458.5" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="H" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJa-OR-WC1">
+                                                <rect key="frame" x="0.0" y="510" width="350" height="23"/>
+                                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
+                                                <color key="textColor" red="1" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-o4-BAA">
+                                                <rect key="frame" x="0.0" y="559" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="W" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rk-3g-gur">
+                                                <rect key="frame" x="0.0" y="610.5" width="350" height="23"/>
+                                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
+                                                <color key="textColor" red="1" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wh-5z-8Vy">
+                                                <rect key="frame" x="0.0" y="659.5" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9V-Zf-NAX">
+                                                <rect key="frame" x="0.0" y="711" width="350" height="23"/>
+                                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
+                                                <color key="textColor" red="1" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rl-R0-knn">
+                                                <rect key="frame" x="0.0" y="760" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZB-F2-IMI">
+                                                <rect key="frame" x="0.0" y="811.5" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6v-jP-7uU">
+                                                <rect key="frame" x="0.0" y="863" width="350" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="350" id="Rth-BY-Dxx"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="xrX-Je-lgb" firstAttribute="top" secondItem="cfA-M9-qUA" secondAttribute="top" constant="15" id="Fof-Mt-Vlw"/>
+                                    <constraint firstItem="xrX-Je-lgb" firstAttribute="leading" secondItem="cfA-M9-qUA" secondAttribute="leading" constant="20" id="QTA-9M-jSW"/>
+                                    <constraint firstAttribute="bottom" secondItem="xrX-Je-lgb" secondAttribute="bottom" constant="42.5" id="h1r-UP-Bnv"/>
+                                    <constraint firstAttribute="trailing" secondItem="xrX-Je-lgb" secondAttribute="trailing" constant="20" id="qxD-1G-o7G"/>
+                                </constraints>
+                            </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THA-5p-ykS">
+                                <rect key="frame" x="47" y="382" width="320" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="v4i-3D-5vd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="25"/>
+                                <color key="textColor" red="0.58039215690000001" green="0.066666666669999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lgd-AF-PHB" customClass="CocktailImageView" customModule="SearchCocktail" customModuleProvider="target">
+                                <rect key="frame" x="80" y="82" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="TAL-x6-20C"/>
+                                    <constraint firstAttribute="width" constant="250" id="h5J-VK-DBU"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qBG-mK-dwc"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qBG-mK-dwc" firstAttribute="trailing" secondItem="cfA-M9-qUA" secondAttribute="trailing" constant="12" id="085-we-pFR"/>
+                            <constraint firstItem="cfA-M9-qUA" firstAttribute="leading" secondItem="qBG-mK-dwc" secondAttribute="leading" constant="12" id="2zG-M5-XQO"/>
+                            <constraint firstItem="lgd-AF-PHB" firstAttribute="top" secondItem="qBG-mK-dwc" secondAttribute="top" constant="26" id="D8g-8P-Lvw"/>
+                            <constraint firstItem="THA-5p-ykS" firstAttribute="top" secondItem="lgd-AF-PHB" secondAttribute="bottom" constant="50" id="H6o-sD-RjB"/>
+                            <constraint firstItem="lgd-AF-PHB" firstAttribute="leading" secondItem="qBG-mK-dwc" secondAttribute="leading" constant="80" id="T1N-Pn-Thl"/>
+                            <constraint firstItem="cfA-M9-qUA" firstAttribute="top" secondItem="THA-5p-ykS" secondAttribute="bottom" id="aDc-OJ-Ksp"/>
+                            <constraint firstAttribute="bottom" secondItem="cfA-M9-qUA" secondAttribute="bottom" constant="20" id="fdk-cy-IVC"/>
+                            <constraint firstItem="THA-5p-ykS" firstAttribute="leading" secondItem="qBG-mK-dwc" secondAttribute="leading" constant="47" id="x5q-oP-pzc"/>
+                            <constraint firstItem="qBG-mK-dwc" firstAttribute="trailing" secondItem="THA-5p-ykS" secondAttribute="trailing" constant="47" id="zZB-uR-Wea"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="LFW-eJ-e4T"/>
+                    <size key="freeformSize" width="414" height="1400"/>
+                    <connections>
+                        <outlet property="detailImage" destination="lgd-AF-PHB" id="Ss0-Cq-SEW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QYv-ux-QFa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5984" y="51.27436281859071"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="3uO-hm-qKI"/>
         <segue reference="NCK-xB-CvI"/>
     </inferredMetricsTieBreakers>
     <resources>

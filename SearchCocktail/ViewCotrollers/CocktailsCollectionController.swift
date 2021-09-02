@@ -48,7 +48,6 @@ class CocktailsCollectionController: UICollectionViewController {
         
         cell.configure(with: result)
         return cell
-        
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -67,55 +66,16 @@ class CocktailsCollectionController: UICollectionViewController {
             let character = isFiltering ? drinks[indexPath.first?.item ?? 0] : cocktail?.drinks[indexPath.first?.item ?? 0]
             guard let detailVC = segue.destination as? DetailVC else { return }
             detailVC.detailsCocktail = character
+            detailVC.indetifaerDetaiOnsegue = true
             print("\(character?.nameDrink ?? "")")
         }
     }
     
     @IBAction func buttonActionSegueOnFavorites(_ sender: Any) {
-        performSegue(withIdentifier: "showFavrites", sender: nil)
+        performSegue(withIdentifier: "showFavorites", sender: nil)
     }
     @IBAction func backStarterView(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
-    }
-    
-    private func setupNavigationBar() {
-        if isFiltering ? drinks.count == 0 : cocktail?.drinks.count ?? 0 == 0 {
-            titleName = "Ничего не найдено"
-        } else {
-            titleName = "Поиск по '\(name)' найдено \(isFiltering ? drinks.count : cocktail?.drinks.count ?? 0) совпадений"
-        }
-        let titleLabel = UILabel()
-        titleLabel.textAlignment = .center
-        titleLabel.text = titleName
-        titleLabel.textColor = .gray
-        titleLabel.font = UIFont.systemFont(ofSize: 15)
-        navigationItem.titleView = titleLabel
-        
-        // Navigation bar appearance
-        if #available(iOS 13.0, *) {
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.backgroundColor = .white
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            
-            navigationController?.navigationBar.standardAppearance = navBarAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        }
-    }
-    // MARK: - SearchController
-    private func setupSearchController() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
-        searchController.searchBar.barTintColor = .white
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-        
-        if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
-            textField.font = UIFont.boldSystemFont(ofSize: 17)
-            textField.textColor = .darkGray
-        }
     }
     
     private func fetchData(from url: String?) {
@@ -148,5 +108,50 @@ extension CocktailsCollectionController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    }
+}
+
+extension CocktailsCollectionController {
+    
+    // MARK: - Navigation Bar
+    private func setupNavigationBar() {
+        if isFiltering ? drinks.count == 0 : cocktail?.drinks.count ?? 0 == 0 {
+            titleName = "Ничего не найдено"
+        } else {
+            titleName = "Поиск по '\(name)' найдено \(isFiltering ? drinks.count : cocktail?.drinks.count ?? 0) совпадений"
+        }
+        
+        let titleLabel = UILabel()
+        titleLabel.textAlignment = .center
+        titleLabel.text = titleName
+        titleLabel.textColor = .gray
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        navigationItem.titleView = titleLabel
+        
+        // Navigation bar appearance
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.backgroundColor = .white
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
+    }
+    // MARK: - SearchController
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.barTintColor = .white
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            textField.font = UIFont.boldSystemFont(ofSize: 17)
+            textField.textColor = .darkGray
+        }
     }
 }

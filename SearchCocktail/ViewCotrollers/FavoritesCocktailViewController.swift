@@ -43,5 +43,13 @@ class FavoritesCocktailViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let character = cocktails[indexPath.row]
+        let detailVC = segue.destination as! DetailVC
+        detailVC.indetifaerDetaiOnsegue = false
+        detailVC.detailsFavorites = character
+    }
 }
 

@@ -15,20 +15,24 @@ class DetailVC: UIViewController {
         }
     }
     
-    @IBOutlet var ingredientCocktail: UILabel!
     
     var detailsCocktail: Drink!
+    var detailsFavorites: FavoritesCocktail!
+    var indetifaerDetaiOnsegue = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailImage.fetchImage(from: detailsCocktail.images ?? "")
-        ingredientCocktail.text = detailsCocktail.ingredient
-        setupNavigationBar()
-        
+        if indetifaerDetaiOnsegue == true {
+            detailImage.fetchImage(from: detailsCocktail.images ?? "")
+//            ingredientCocktail.text = detailsCocktail.ingredient
+            setupNavigationBar()
+        } else {
+            detailImage.fetchImage(from: detailsFavorites.images ?? "")
+//            ingredientCocktail.text = detailsFavorites.instructions
+        }
     }
     
     private func setupNavigationBar() {
-        
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
         titleLabel.text = detailsCocktail.nameDrink
