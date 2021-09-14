@@ -31,11 +31,6 @@ class CocktailsCollectionController: UICollectionViewController {
         fetchData(from: URLexemples.url.rawValue + name)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupNavigationBar()
-    }
-    
     // MARK: UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -45,24 +40,17 @@ class CocktailsCollectionController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CocktailCell
         let result = isFiltering ? drinks[indexPath.row] : cocktail?.drinks[indexPath.row]
-        
         cell.configure(with: result)
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cocktailAction =  isFiltering ? drinks[indexPath.row] : cocktail?.drinks[indexPath.row]
-        
-        switch cocktailAction {
-        case .none: print("Нету")
-        case .some(_): performSegue(withIdentifier: "show", sender: nil)
-        }
+        performSegue(withIdentifier: "show", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
         if segue.identifier == "show" {
+            guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
             let character = isFiltering ? drinks[indexPath.first?.item ?? 0] : cocktail?.drinks[indexPath.first?.item ?? 0]
             guard let detailVC = segue.destination as? DetailVC else { return }
             detailVC.detailsCocktail = character
@@ -81,6 +69,7 @@ class CocktailsCollectionController: UICollectionViewController {
     private func fetchData(from url: String?) {
         NetworkManager.shared.fetchData(from: url) {  drink in
             self.cocktail = drink
+            self.setupNavigationBar()
             self.collectionView.reloadData()
         }
     }

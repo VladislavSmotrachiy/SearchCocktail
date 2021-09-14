@@ -23,9 +23,9 @@ class NetworkManager {
                 return
             }
             do {
-                let hero = try JSONDecoder().decode(Cocktail.self, from: data)
+                let cocktail = try JSONDecoder().decode(Cocktail.self, from: data)
                 DispatchQueue.main.async {
-                    complition(hero)
+                    complition(cocktail)
                 }
             } catch let error {
                 print(error.localizedDescription)
@@ -65,7 +65,6 @@ class ImageManager {
                 print(error?.localizedDescription ?? "No Description")
                 return
             }
-            
             guard url == response.url else { return }
             
             DispatchQueue.main.async {

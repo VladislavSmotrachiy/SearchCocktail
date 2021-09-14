@@ -11,7 +11,7 @@ struct Cocktail: Decodable{
     let drinks: [Drink]
 }
 
-struct Drink:  Decodable, Hashable {
+struct Drink:  Decodable {
     let id: String?
     let nameDrink: String
     let drinkAlternate: String?

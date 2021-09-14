@@ -27,28 +27,30 @@ class CocktailCell: UICollectionViewCell {
     }
     
     @objc func addActionFavorites(){
-        if isButtonHeart {
-            addFavorites.tintColor = .gray
-            isButtonHeart.toggle()
-        } else {
-            let cocktail = FavoritesCocktail.init(
-                nameDrink: drink?.nameDrink ?? "" ,
-                drinkAlternate: drink?.drinkAlternate ?? "",
-                tags: drink?.tags ?? "",
-                video: drink?.video ?? "" ,
-                category: drink?.category ?? "" ,
-                IBA: drink?.IBA  ?? "",
-                alcoholic: drink?.alcoholic ?? "",
-                glass: drink?.glass ?? "",
-                instructions: drink?.instructions ?? "",
-                images: drink?.images ?? "",
-                dateModified: drink?.dateModified ?? ""
-            )
-            
+        let cocktail = FavoritesCocktail.init(
+            id: drink?.id ?? "",
+            nameDrink: drink?.nameDrink ?? "" ,
+            drinkAlternate: drink?.drinkAlternate ?? "",
+            tags: drink?.tags ?? "",
+            video: drink?.video ?? "" ,
+            category: drink?.category ?? "" ,
+            IBA: drink?.IBA  ?? "",
+            alcoholic: drink?.alcoholic ?? "",
+            glass: drink?.glass ?? "",
+            instructions: drink?.instructions ?? "",
+            images: drink?.images ?? "",
+            dateModified: drink?.dateModified ?? ""
+        )
+        
+        if !StorageManager.shared.fetchFavorites().contains(where: { a in
+            a.id == cocktail.id
+        }) {
             StorageManager.shared.save(contact: cocktail)
             addFavorites.tintColor = .red
             isButtonHeart.toggle()
-            print("\(StorageManager.shared.fetchContacts().count)")
+        } else {
+            addFavorites.tintColor = .gray
+            isButtonHeart.toggle()
         }
     }
 }

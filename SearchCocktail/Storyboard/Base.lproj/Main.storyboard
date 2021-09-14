@@ -61,7 +61,13 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Favorites" image="star" catalog="system" id="K00-Km-6YJ"/>
-                    <navigationItem key="navigationItem" id="R6i-nl-XzY"/>
+                    <navigationItem key="navigationItem" id="R6i-nl-XzY">
+                        <barButtonItem key="rightBarButtonItem" image="trash.fill" catalog="system" id="oDW-NJ-BTa">
+                            <connections>
+                                <action selector="deleteAll:" destination="bwK-dB-tMp" id="bGh-Td-wQX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpr-mo-wAC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -267,6 +273,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="9mw-Wc-1w3" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HUU-5t-t5t">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -466,6 +473,7 @@
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <image name="trash.fill" catalog="system" width="121" height="128"/>
         <systemColor name="secondarySystemGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

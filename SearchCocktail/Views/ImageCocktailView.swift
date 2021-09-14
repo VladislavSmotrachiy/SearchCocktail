@@ -33,11 +33,13 @@ class CocktailImageView: UIImageView {
         let request = URLRequest(url: url)
         let cachedResponse = CachedURLResponse(response: response, data: data)
         URLCache.shared.storeCachedResponse(cachedResponse, for: request)
+        print("сохранил")
     }
     
     private func getCachedImage(from url: URL) -> UIImage? {
         let request = URLRequest(url: url)
         if let cachedResponse = URLCache.shared.cachedResponse(for: request) {
+            print("получил")
             return UIImage(data: cachedResponse.data)
         }
         return nil

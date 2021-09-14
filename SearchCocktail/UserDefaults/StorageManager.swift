@@ -19,22 +19,30 @@ class StorageManager {
     }
     
     func save(contact: FavoritesCocktail) {
-        var contacts = fetchContacts()
-        contacts.insert(contact, at: 0)
+        var contacts = fetchFavorites()
+        contacts.insert(contact , at: 0)
         guard let data = try? PropertyListEncoder().encode(contacts) else { return }
         try? data.write(to: archiveURL, options: .noFileProtection)
     }
     
-    func fetchContacts() -> [FavoritesCocktail] {
+    func fetchFavorites() -> [FavoritesCocktail] {
         guard let data = try? Data(contentsOf: archiveURL) else { return [] }
         guard let cocktail = try? PropertyListDecoder().decode([FavoritesCocktail].self, from: data) else { return [] }
         return cocktail
     }
     
-    func deleteContact(at index: Int) {
-        var result = fetchContacts()
+    func deleteFavorites(at index: Int) {
+        var result = fetchFavorites()
         result.remove(at: index)
         guard let data = try? PropertyListEncoder().encode(result) else { return }
         try? data.write(to: archiveURL, options: .noFileProtection)
     }
+    
+    func deleteAll() {
+        var result = fetchFavorites()
+        result.removeAll()
+        guard let data = try? PropertyListEncoder().encode(result) else { return }
+        try? data.write(to: archiveURL, options: .noFileProtection)
+    }
+    
 }

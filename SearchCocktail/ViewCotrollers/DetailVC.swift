@@ -22,7 +22,7 @@ class DetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if indetifaerDetaiOnsegue == true {
+        if indetifaerDetaiOnsegue {
             detailImage.fetchImage(from: detailsCocktail.images ?? "")
 //            ingredientCocktail.text = detailsCocktail.ingredient
             setupNavigationBar()

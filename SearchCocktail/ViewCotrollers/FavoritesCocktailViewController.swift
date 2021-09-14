@@ -18,7 +18,7 @@ class FavoritesCocktailViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cocktails = StorageManager.shared.fetchContacts()
+        cocktails = StorageManager.shared.fetchFavorites()
         self.tableView.reloadData()
     }
     
@@ -39,7 +39,7 @@ class FavoritesCocktailViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             cocktails.remove(at: indexPath.row)
-            StorageManager.shared.deleteContact(at: indexPath.row)
+            StorageManager.shared.deleteFavorites(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
@@ -50,6 +50,12 @@ class FavoritesCocktailViewController: UITableViewController {
         let detailVC = segue.destination as! DetailVC
         detailVC.indetifaerDetaiOnsegue = false
         detailVC.detailsFavorites = character
+    }
+    @IBAction func deleteAll(_ sender: Any) {
+        DispatchQueue.main.async {
+            StorageManager.shared.deleteAll()
+            self.tableView.reloadData()
+        }
     }
 }
 
