@@ -11,21 +11,28 @@ class FavoritesCocktailViewController: UITableViewController {
     
     private var cocktails: [FavoritesCocktail] = []
     
+    @IBOutlet var deleteButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 80
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cocktails = StorageManager.shared.fetchFavorites()
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return  cocktails.count
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,14 +55,9 @@ class FavoritesCocktailViewController: UITableViewController {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let character = cocktails[indexPath.row]
         let detailVC = segue.destination as! DetailVC
-        detailVC.indetifaerDetaiOnsegue = false
-        detailVC.detailsFavorites = character
+        detailVC.indetifaerDetaiOnSegue = false
+        detailVC.favoritesDetail = character
     }
-    @IBAction func deleteAll(_ sender: Any) {
-        DispatchQueue.main.async {
-            StorageManager.shared.deleteAll()
-            self.tableView.reloadData()
-        }
-    }
+
 }
 

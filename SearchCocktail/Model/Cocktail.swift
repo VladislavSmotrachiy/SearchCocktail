@@ -38,14 +38,8 @@ struct Drink:  Decodable {
     let dateModified: String?
     
     var ingredient: String {
-        """
-    Первый ингредиент:  \(ingredientFirst ?? "")  \(proportionFirst ?? "")
-    2 - \(ingredientSecond ?? ""): \(proportionSecond ?? "")
-    3 - \(ingredientThrid ?? ""): \(proportionThrid ?? "")
-    4 - \(ingredientFourth ?? ""): \( proportionFourth ?? "")
-    5 - \(ingredientFifth ?? ""): \(proportionFifth ?? "")
-    6 - \(ingredientSixth ?? ""): \(proportionSixth ?? "")
-    """
+    " \(ingredientFirst ?? "") : \(proportionFirst ?? "")"
+
     }
 
     enum CodingKeys: String, CodingKey {

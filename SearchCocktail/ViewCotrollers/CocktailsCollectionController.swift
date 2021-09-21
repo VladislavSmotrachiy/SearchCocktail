@@ -31,6 +31,11 @@ class CocktailsCollectionController: UICollectionViewController {
         fetchData(from: URLexemples.url.rawValue + name)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+    }
+    
     // MARK: UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -53,8 +58,8 @@ class CocktailsCollectionController: UICollectionViewController {
             guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
             let character = isFiltering ? drinks[indexPath.first?.item ?? 0] : cocktail?.drinks[indexPath.first?.item ?? 0]
             guard let detailVC = segue.destination as? DetailVC else { return }
-            detailVC.detailsCocktail = character
-            detailVC.indetifaerDetaiOnsegue = true
+            detailVC.drinkDetail = character
+            detailVC.indetifaerDetaiOnSegue = true
             print("\(character?.nameDrink ?? "")")
         }
     }
@@ -113,7 +118,7 @@ extension CocktailsCollectionController {
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
         titleLabel.text = titleName
-        titleLabel.textColor = .gray
+        titleLabel.textColor = .black
         titleLabel.font = UIFont.systemFont(ofSize: 15)
         navigationItem.titleView = titleLabel
         
