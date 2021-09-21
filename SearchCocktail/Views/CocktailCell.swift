@@ -9,6 +9,7 @@ import UIKit
 
 class CocktailCell: UICollectionViewCell {
     
+    weak var viewController: UIViewController?
     @IBOutlet var addFavorites: UIButton!
     @IBOutlet weak var imageCocktail: CocktailImageView!{
         didSet {
@@ -54,7 +55,7 @@ class CocktailCell: UICollectionViewCell {
             proportionSixth: drink?.proportionSixth ?? "",
             dateModified: drink?.dateModified ?? ""
         )
-
+        
         if !StorageManager.shared.fetchFavorites().contains(where: { a in
             a.id == cocktail.id
         }) {
@@ -63,8 +64,24 @@ class CocktailCell: UICollectionViewCell {
             isButtonHeart.toggle()
         } else {
             addFavorites.tintColor = .gray
-            isButtonHeart.toggle()
+            successAlert()
         }
     }
+    
+    private func successAlert() {
+        let alert = UIAlertController(
+            title: "Уже в избраном",
+            message: "Коктель не возможно добавить, он уже находить в избраном",
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        isButtonHeart = true
+        addFavorites.tintColor = .red
+        alert.addAction(okAction)
+        self.viewController?.present(alert, animated: true)
+    }
 }
+
+
 

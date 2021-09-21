@@ -19,8 +19,7 @@ class StarterViewSearch: UIViewController {
         nameCocktail.enablesReturnKeyAutomatically = true
         button?.isUserInteractionEnabled = false
         button?.alpha = 0.5
-        guard let img = UIImage(named: "cocktails") else {return}
-        self.view.layer.contents = img.cgImage
+        self.view.addBackground()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -57,5 +56,21 @@ extension StarterViewSearch: UITextFieldDelegate {
             button?.isUserInteractionEnabled = false
         }
         return true
+    }
+}
+
+extension UIView {
+    func addBackground() {
+        // screen width and height:
+        let width = UIScreen.main.bounds.size.width
+        let height = UIScreen.main.bounds.size.height
+        
+        let imageViewBackground = UIImageView(frame: CGRect(x: 20, y: -20, width: width, height: height))
+        imageViewBackground.image = UIImage(named: "cocktails")
+        
+        // you can change the content mode:
+        imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFill
+        self.addSubview(imageViewBackground)
+        self.sendSubviewToBack(imageViewBackground)
     }
 }

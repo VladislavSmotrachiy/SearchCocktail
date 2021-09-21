@@ -56,9 +56,7 @@ class DetailVC: UIViewController {
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         
         navigationController?.navigationBar.standardAppearance = navBarAppearance
-        
     }
-    
     
     // MARK: - FatchDetails
     

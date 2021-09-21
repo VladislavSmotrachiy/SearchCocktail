@@ -45,6 +45,7 @@ class CocktailsCollectionController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CocktailCell
         let result = isFiltering ? drinks[indexPath.row] : cocktail?.drinks[indexPath.row]
+        cell.viewController = self
         cell.configure(with: result)
         return cell
     }
@@ -147,5 +148,7 @@ extension CocktailsCollectionController {
             textField.font = UIFont.boldSystemFont(ofSize: 17)
             textField.textColor = .darkGray
         }
-    }
+    } 
 }
+
+
