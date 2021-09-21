@@ -59,6 +59,9 @@ class DetailVC: UIViewController {
         
     }
     
+    
+    // MARK: - FatchDetails
+    
     private func fatchDetailsCocktailFromNetwork(){
         nameCocktail.text = drinkDetail.nameDrink
         instruction.text = drinkDetail.instructions
@@ -81,7 +84,7 @@ class DetailVC: UIViewController {
             ingredientThrid.text = drinkDetail.thridPosition
         }
         
-        if drinkDetail.ingredientFourth == nil{
+        if drinkDetail.ingredientFourth == nil {
             ingredientFourth.text = ""
         } else {
             ingredientFourth.text = drinkDetail.fourthPosition
@@ -107,13 +110,13 @@ class DetailVC: UIViewController {
         ingredientSecond.text = favoritesDetail.secondPosition
         glass.text = favoritesDetail.glass
         
-        if favoritesDetail.ingredientThrid == ""{
+        if favoritesDetail.ingredientThrid == "" {
             ingredientThrid.text = ""
         } else {
             ingredientThrid.text = favoritesDetail.thridPosition
         }
         
-        if favoritesDetail.ingredientFourth == ""{
+        if favoritesDetail.ingredientFourth == "" {
             ingredientFourth.text = ""
         } else {
             ingredientFourth.text = favoritesDetail.fourthPosition

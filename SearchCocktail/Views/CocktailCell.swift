@@ -18,6 +18,7 @@ class CocktailCell: UICollectionViewCell {
     @IBOutlet weak var nameCocktail: UILabel!
     private var isButtonHeart = false
     private var drink: Drink?
+    private var favorites: FavoritesCocktail!
     
     func configure(with result: Drink?) {
         drink = result
@@ -53,7 +54,7 @@ class CocktailCell: UICollectionViewCell {
             proportionSixth: drink?.proportionSixth ?? "",
             dateModified: drink?.dateModified ?? ""
         )
-        
+
         if !StorageManager.shared.fetchFavorites().contains(where: { a in
             a.id == cocktail.id
         }) {

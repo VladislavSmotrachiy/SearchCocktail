@@ -10,9 +10,7 @@ import UIKit
 class FavoritesCocktailViewController: UITableViewController {
     
     private var cocktails: [FavoritesCocktail] = []
-    
-    @IBOutlet var deleteButton: UIBarButtonItem!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -58,6 +56,5 @@ class FavoritesCocktailViewController: UITableViewController {
         detailVC.indetifaerDetaiOnSegue = false
         detailVC.favoritesDetail = character
     }
-
 }
 

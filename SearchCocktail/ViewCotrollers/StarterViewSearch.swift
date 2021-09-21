@@ -11,7 +11,7 @@ class StarterViewSearch: UIViewController {
     
     @IBOutlet weak var nameCocktail: UITextField!
     @IBOutlet weak var button: UIButton!
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nameCocktail?.delegate = self
@@ -19,6 +19,8 @@ class StarterViewSearch: UIViewController {
         nameCocktail.enablesReturnKeyAutomatically = true
         button?.isUserInteractionEnabled = false
         button?.alpha = 0.5
+        guard let img = UIImage(named: "cocktails") else {return}
+        self.view.layer.contents = img.cgImage
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
