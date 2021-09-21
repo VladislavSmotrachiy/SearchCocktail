@@ -37,9 +37,23 @@ struct Drink:  Decodable {
     let proportionSixth: String?
     let dateModified: String?
     
-    var ingredient: String {
-    " \(ingredientFirst ?? "") : \(proportionFirst ?? "")"
-
+    var firstPosition: String {
+   " \(ingredientFirst ?? ""): \(proportionFirst ?? "")"
+    }
+    var secondPosition: String {
+   " \(ingredientSecond ?? ""): \(proportionSecond ?? "")"
+    }
+    var thridPosition: String {
+   " \(ingredientThrid ?? "its all"): \(proportionThrid ?? "its all")"
+    }
+    var fourthPosition: String {
+        " \(ingredientFourth ?? "its all"): \(proportionFourth ?? "its all")"
+    }
+    var fifthPosition: String {
+   " \(ingredientFifth ?? "its all"): \(proportionFifth ?? "its all")"
+    }
+    var sixthPosition: String {
+   " \(ingredientSixth ?? "its all"): \(proportionSixth ?? "its all")"
     }
 
     enum CodingKeys: String, CodingKey {

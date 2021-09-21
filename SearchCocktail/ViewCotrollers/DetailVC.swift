@@ -33,6 +33,7 @@ class DetailVC: UIViewController {
         if indetifaerDetaiOnSegue {
             detailImage.fetchImage(from: drinkDetail.images ?? "")
             setupNavigationBar(title: drinkDetail.nameDrink)
+            fatchDetailsCocktailFromNetwork()
         } else {
             detailImage.fetchImage(from: favoritesDetail.images ?? "")
             setupNavigationBar(title: favoritesDetail.nameDrink ?? "")
@@ -58,7 +59,48 @@ class DetailVC: UIViewController {
         
     }
     
-    private func fatchDetailsCocktailFromFavorites(){
+    private func fatchDetailsCocktailFromNetwork(){
+        nameCocktail.text = drinkDetail.nameDrink
+        instruction.text = drinkDetail.instructions
+        glass.text = drinkDetail.glass
+        
+        if drinkDetail.ingredientFirst == nil{
+            ingredientFirst.text = ""
+        } else {
+            ingredientFirst.text = drinkDetail.firstPosition
+        }
+        if drinkDetail.ingredientSecond == nil{
+            ingredientSecond.text = ""
+        } else {
+            ingredientSecond.text = drinkDetail.secondPosition
+        }
+        
+        if drinkDetail.ingredientThrid == nil {
+            ingredientThrid.text = ""
+        } else {
+            ingredientThrid.text = drinkDetail.thridPosition
+        }
+        
+        if drinkDetail.ingredientFourth == nil{
+            ingredientFourth.text = ""
+        } else {
+            ingredientFourth.text = drinkDetail.fourthPosition
+        }
+        
+        if drinkDetail.ingredientFifth == nil {
+            ingredientFifth.text = ""
+        } else {
+            ingredientFifth.text = drinkDetail.fifthPosition
+        }
+        
+        if drinkDetail.ingredientSixth == nil {
+            ingredientSixth.text = ""
+        } else {
+            ingredientSixth.text = drinkDetail.sixthPosition
+        }
+    }
+    
+    private func fatchDetailsCocktailFromFavorites() {
         nameCocktail.text = favoritesDetail.nameDrink
         instruction.text = favoritesDetail.instructions
         ingredientFirst.text = favoritesDetail.firstPosition
@@ -88,10 +130,5 @@ class DetailVC: UIViewController {
         } else {
             ingredientSixth.text = favoritesDetail.sixthPosition
         }
-        
-    }
-    
-    private func fatchDetailsCocktailFromNetwork() {
-        
     }
 }
