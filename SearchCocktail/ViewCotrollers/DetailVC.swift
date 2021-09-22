@@ -33,11 +33,39 @@ class DetailVC: UIViewController {
         if indetifaerDetaiOnSegue {
             detailImage.fetchImage(from: drinkDetail.images ?? "")
             setupNavigationBar(title: drinkDetail.nameDrink)
-            fatchDetailsCocktailFromNetwork()
+            fatchDetails(name: drinkDetail.nameDrink,
+                         instructions: drinkDetail.instructions ?? "",
+                         glassCocktail: drinkDetail.glass ?? "",
+                         firstIngredient: drinkDetail.ingredientFirst,
+                         secondIngredient: drinkDetail.ingredientSecond,
+                         thridIngredient: drinkDetail.ingredientThrid,
+                         fourthIngredient: drinkDetail.ingredientFourth,
+                         fifthIngredient: drinkDetail.ingredientFifth,
+                         sixthIngredient: drinkDetail.ingredientSixth,
+                         positionFirst: drinkDetail.firstPosition,
+                         positionSecond: drinkDetail.secondPosition,
+                         positionThrid: drinkDetail.thridPosition,
+                         positionFourth: drinkDetail.fourthPosition,
+                         positionFifth: drinkDetail.fifthPosition,
+                         positionSixth: drinkDetail.sixthPosition)
         } else {
             detailImage.fetchImage(from: favoritesDetail.images ?? "")
             setupNavigationBar(title: favoritesDetail.nameDrink ?? "")
-            fatchDetailsCocktailFromFavorites()
+            fatchDetails(name: favoritesDetail.nameDrink ?? "",
+                         instructions: favoritesDetail.instructions ?? "",
+                         glassCocktail: favoritesDetail.glass ?? "",
+                         firstIngredient: favoritesDetail.ingredientFirst,
+                         secondIngredient: favoritesDetail.ingredientSecond,
+                         thridIngredient: favoritesDetail.ingredientThrid,
+                         fourthIngredient: favoritesDetail.ingredientFourth,
+                         fifthIngredient: favoritesDetail.ingredientFifth,
+                         sixthIngredient: favoritesDetail.ingredientSixth,
+                         positionFirst: favoritesDetail.firstPosition,
+                         positionSecond: favoritesDetail.secondPosition,
+                         positionThrid: favoritesDetail.thridPosition,
+                         positionFourth: favoritesDetail.fourthPosition,
+                         positionFifth: favoritesDetail.fifthPosition,
+                         positionSixth: favoritesDetail.sixthPosition)
         }
     }
     
@@ -60,76 +88,53 @@ class DetailVC: UIViewController {
     
     // MARK: - FatchDetails
     
-    private func fatchDetailsCocktailFromNetwork(){
-        nameCocktail.text = drinkDetail.nameDrink
-        instruction.text = drinkDetail.instructions
-        glass.text = drinkDetail.glass
+    private func fatchDetails(
+        name: String, instructions: String,
+        glassCocktail: String, firstIngredient: String?,
+        secondIngredient: String?, thridIngredient: String?,
+        fourthIngredient: String?, fifthIngredient: String?,
+        sixthIngredient: String?, positionFirst: String,
+        positionSecond: String, positionThrid: String,
+        positionFourth: String, positionFifth: String,
+        positionSixth: String ) {
         
-        if drinkDetail.ingredientFirst == nil{
+        nameCocktail.text = name
+        instruction.text = instructions
+        glass.text = glassCocktail
+        
+        if firstIngredient == nil{
             ingredientFirst.text = ""
         } else {
-            ingredientFirst.text = drinkDetail.firstPosition
+            ingredientFirst.text = positionFirst
         }
-        if drinkDetail.ingredientSecond == nil{
+        if secondIngredient == nil{
             ingredientSecond.text = ""
         } else {
-            ingredientSecond.text = drinkDetail.secondPosition
+            ingredientSecond.text = positionSecond
         }
         
-        if drinkDetail.ingredientThrid == nil {
+        if thridIngredient == nil {
             ingredientThrid.text = ""
         } else {
-            ingredientThrid.text = drinkDetail.thridPosition
+            ingredientThrid.text = positionThrid
         }
         
-        if drinkDetail.ingredientFourth == nil {
+        if fourthIngredient == nil {
             ingredientFourth.text = ""
         } else {
-            ingredientFourth.text = drinkDetail.fourthPosition
+            ingredientFourth.text = positionFourth
         }
         
-        if drinkDetail.ingredientFifth == nil {
+        if fifthIngredient == nil {
             ingredientFifth.text = ""
         } else {
-            ingredientFifth.text = drinkDetail.fifthPosition
+            ingredientFifth.text = positionFifth
         }
         
-        if drinkDetail.ingredientSixth == nil {
+        if sixthIngredient == nil {
             ingredientSixth.text = ""
         } else {
-            ingredientSixth.text = drinkDetail.sixthPosition
-        }
-    }
-    
-    private func fatchDetailsCocktailFromFavorites() {
-        nameCocktail.text = favoritesDetail.nameDrink
-        instruction.text = favoritesDetail.instructions
-        ingredientFirst.text = favoritesDetail.firstPosition
-        ingredientSecond.text = favoritesDetail.secondPosition
-        glass.text = favoritesDetail.glass
-        
-        if favoritesDetail.ingredientThrid == "" {
-            ingredientThrid.text = ""
-        } else {
-            ingredientThrid.text = favoritesDetail.thridPosition
-        }
-        
-        if favoritesDetail.ingredientFourth == "" {
-            ingredientFourth.text = ""
-        } else {
-            ingredientFourth.text = favoritesDetail.fourthPosition
-        }
-        
-        if favoritesDetail.ingredientFifth == "" {
-            ingredientFifth.text = ""
-        } else {
-            ingredientFifth.text = favoritesDetail.fifthPosition
-        }
-        
-        if favoritesDetail.ingredientSixth == "" {
-            ingredientSixth.text = ""
-        } else {
-            ingredientSixth.text = favoritesDetail.sixthPosition
+            ingredientSixth.text = positionSixth
         }
     }
 }
