@@ -84,8 +84,4 @@ struct Drink:  Decodable {
     }
 }
 
-enum URLexemples: String {
-    case url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
-}
-
 

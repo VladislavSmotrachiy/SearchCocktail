@@ -9,13 +9,13 @@ import Foundation
 
 class NetworkManager {
     
+    private let api = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
     static let shared = NetworkManager()
     
     private init() {}
     
-    func fetchData(from url: String?, with complition: @escaping (Cocktail) -> Void) {
-        guard let stringURL = url else { return }
-        guard let url = URL(string: stringURL) else { return }
+    func fetchData(from query: String, with complition: @escaping (Cocktail) -> Void) {
+        guard let url = URL(string: api + query) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else {

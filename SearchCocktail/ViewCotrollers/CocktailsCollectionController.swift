@@ -20,7 +20,6 @@ class CocktailsCollectionController: UICollectionViewController {
     private var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
     }
-    
     var name = ""
     var titleName = ""
     
@@ -28,7 +27,7 @@ class CocktailsCollectionController: UICollectionViewController {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         setupSearchController()
-        fetchData(from: URLexemples.url.rawValue + name)
+        fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,25 +38,25 @@ class CocktailsCollectionController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        isFiltering ? drinks.count : cocktail?.drinks.count ?? 0
+     isFiltering ? drinks.count : cocktail?.drinks.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CocktailCell
         let result = isFiltering ? drinks[indexPath.row] : cocktail?.drinks[indexPath.row]
-        cell.viewController = self
         cell.configure(with: result)
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "show", sender: nil)
+        let result = cocktail?.drinks[indexPath.row]
+        performSegue(withIdentifier: "show", sender: result)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show" {
             guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
-            let character = isFiltering ? drinks[indexPath.first?.item ?? 0] : cocktail?.drinks[indexPath.first?.item ?? 0]
+            let character = cocktail?.drinks[indexPath.first?.item ?? 0]
             guard let detailVC = segue.destination as? DetailVC else { return }
             detailVC.drinkDetail = character
             detailVC.indetifaerDetaiOnSegue = true
@@ -70,10 +69,10 @@ class CocktailsCollectionController: UICollectionViewController {
     }
     @IBAction func backStarterView(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
+        
     }
-    
-    private func fetchData(from url: String?) {
-        NetworkManager.shared.fetchData(from: url) {  drink in
+    private func fetchData() {
+        NetworkManager.shared.fetchData(from: name) {  drink in
             self.cocktail = drink
             self.setupNavigationBar()
             self.collectionView.reloadData()
@@ -123,8 +122,7 @@ extension CocktailsCollectionController {
         titleLabel.font = UIFont.systemFont(ofSize: 15)
         navigationItem.titleView = titleLabel
         
-        // Navigation bar appearance
-        if #available(iOS 13.0, *) {
+        
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.backgroundColor = .white
@@ -133,7 +131,6 @@ extension CocktailsCollectionController {
             
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        }
     }
     // MARK: - SearchController
     private func setupSearchController() {

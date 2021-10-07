@@ -24,49 +24,57 @@ class DetailVC: UIViewController {
         }
     }
     
+    @IBOutlet var buttonFavorites: UIButton!
     var drinkDetail: Drink!
     var favoritesDetail: FavoritesCocktail!
     var indetifaerDetaiOnSegue = false
+    private var isButtonHeart = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if indetifaerDetaiOnSegue {
-            detailImage.fetchImage(from: drinkDetail.images ?? "")
-            setupNavigationBar(title: drinkDetail.nameDrink)
-            fatchDetails(name: drinkDetail.nameDrink,
-                         instructions: drinkDetail.instructions ?? "",
-                         glassCocktail: drinkDetail.glass ?? "",
-                         firstIngredient: drinkDetail.ingredientFirst,
-                         secondIngredient: drinkDetail.ingredientSecond,
-                         thridIngredient: drinkDetail.ingredientThrid,
-                         fourthIngredient: drinkDetail.ingredientFourth,
-                         fifthIngredient: drinkDetail.ingredientFifth,
-                         sixthIngredient: drinkDetail.ingredientSixth,
-                         positionFirst: drinkDetail.firstPosition,
-                         positionSecond: drinkDetail.secondPosition,
-                         positionThrid: drinkDetail.thridPosition,
-                         positionFourth: drinkDetail.fourthPosition,
-                         positionFifth: drinkDetail.fifthPosition,
-                         positionSixth: drinkDetail.sixthPosition)
+        details()
+    }
+    
+    @IBAction func buttonAddToFavorites(_ sender: UIButton) {
+        let c = FavoritesCocktail.init(
+            id: drinkDetail?.id ?? "",
+            nameDrink: drinkDetail?.nameDrink ?? "" ,
+            drinkAlternate: drinkDetail?.drinkAlternate ?? "",
+            tags: drinkDetail?.tags ?? "",
+            video: drinkDetail?.video ?? "",
+            category: drinkDetail?.category ?? "",
+            IBA: drinkDetail?.IBA ?? "",
+            alcoholic: drinkDetail?.alcoholic ?? "",
+            glass: drinkDetail?.glass ?? "",
+            instructions: drinkDetail?.instructions ?? "",
+            images: drinkDetail?.images ?? "",
+            ingredientFirst: drinkDetail?.ingredientFirst ?? "",
+            ingredientSecond: drinkDetail?.ingredientSecond ?? "",
+            ingredientThrid: drinkDetail?.ingredientThrid ?? "",
+            ingredientFourth: drinkDetail?.ingredientFourth ?? "",
+            ingredientFifth: drinkDetail?.ingredientFifth ?? "",
+            ingredientSixth: drinkDetail?.ingredientSixth ?? "",
+            proportionFirst: drinkDetail?.proportionFirst ?? "",
+            proportionSecond: drinkDetail?.proportionSecond ?? "",
+            proportionThrid: drinkDetail?.proportionThrid ?? "",
+            proportionFourth: drinkDetail?.proportionFourth ?? "",
+            proportionFifth: drinkDetail?.proportionFifth ?? "",
+            proportionSixth: drinkDetail?.proportionSixth ?? "",
+            dateModified: drinkDetail?.dateModified ?? ""
+        )
+        
+        if StorageManager.shared.fetchFavorites().contains(where: { a in
+            a.id == c.id
+        }) {
+            sender.tintColor = .red
+            successAlert()
+            print(isButtonHeart)
         } else {
-            detailImage.fetchImage(from: favoritesDetail.images ?? "")
-            setupNavigationBar(title: favoritesDetail.nameDrink ?? "")
-            fatchDetails(name: favoritesDetail.nameDrink ?? "",
-                         instructions: favoritesDetail.instructions ?? "",
-                         glassCocktail: favoritesDetail.glass ?? "",
-                         firstIngredient: favoritesDetail.ingredientFirst,
-                         secondIngredient: favoritesDetail.ingredientSecond,
-                         thridIngredient: favoritesDetail.ingredientThrid,
-                         fourthIngredient: favoritesDetail.ingredientFourth,
-                         fifthIngredient: favoritesDetail.ingredientFifth,
-                         sixthIngredient: favoritesDetail.ingredientSixth,
-                         positionFirst: favoritesDetail.firstPosition,
-                         positionSecond: favoritesDetail.secondPosition,
-                         positionThrid: favoritesDetail.thridPosition,
-                         positionFourth: favoritesDetail.fourthPosition,
-                         positionFifth: favoritesDetail.fifthPosition,
-                         positionSixth: favoritesDetail.sixthPosition)
+            StorageManager.shared.save(contact: c)
+            sender.tintColor = .red
+            isButtonHeart.toggle()
         }
+        
     }
     
     private func setupNavigationBar(title: String) {
@@ -88,6 +96,57 @@ class DetailVC: UIViewController {
     
     // MARK: - FatchDetails
     
+    
+    private func details(){
+        if indetifaerDetaiOnSegue {
+            detailImage.fetchImage(from: drinkDetail.images ?? "")
+            setupNavigationBar(title: drinkDetail.nameDrink)
+            fatchDetails(name: drinkDetail.nameDrink,
+                         instructions: drinkDetail.instructions ?? "",
+                         glassCocktail: drinkDetail.glass ?? "",
+                         firstIngredient: drinkDetail.ingredientFirst,
+                         secondIngredient: drinkDetail.ingredientSecond,
+                         thridIngredient: drinkDetail.ingredientThrid,
+                         fourthIngredient: drinkDetail.ingredientFourth,
+                         fifthIngredient: drinkDetail.ingredientFifth,
+                         sixthIngredient: drinkDetail.ingredientSixth,
+                         positionFirst: drinkDetail.firstPosition,
+                         positionSecond: drinkDetail.secondPosition,
+                         positionThrid: drinkDetail.thridPosition,
+                         positionFourth: drinkDetail.fourthPosition,
+                         positionFifth: drinkDetail.fifthPosition,
+                         positionSixth: drinkDetail.sixthPosition)
+            if StorageManager.shared.fetchFavorites().contains(where: { a in
+                a.id == drinkDetail.id
+            }) {
+                buttonFavorites.tintColor = .red
+            }
+        } else {
+            detailImage.fetchImage(from: favoritesDetail.images ?? "")
+            setupNavigationBar(title: favoritesDetail.nameDrink ?? "")
+            fatchDetails(name: favoritesDetail.nameDrink ?? "",
+                         instructions: favoritesDetail.instructions ?? "",
+                         glassCocktail: favoritesDetail.glass ?? "",
+                         firstIngredient: favoritesDetail.ingredientFirst,
+                         secondIngredient: favoritesDetail.ingredientSecond,
+                         thridIngredient: favoritesDetail.ingredientThrid,
+                         fourthIngredient: favoritesDetail.ingredientFourth,
+                         fifthIngredient: favoritesDetail.ingredientFifth,
+                         sixthIngredient: favoritesDetail.ingredientSixth,
+                         positionFirst: favoritesDetail.firstPosition,
+                         positionSecond: favoritesDetail.secondPosition,
+                         positionThrid: favoritesDetail.thridPosition,
+                         positionFourth: favoritesDetail.fourthPosition,
+                         positionFifth: favoritesDetail.fifthPosition,
+                         positionSixth: favoritesDetail.sixthPosition)
+            if StorageManager.shared.fetchFavorites().contains(where: { a in
+                a.id == favoritesDetail.id
+            }) {
+                buttonFavorites.tintColor = .red
+                buttonFavorites.isUserInteractionEnabled = false
+            }
+        }
+    }
     private func fatchDetails(
         name: String, instructions: String,
         glassCocktail: String, firstIngredient: String?,
@@ -97,44 +156,56 @@ class DetailVC: UIViewController {
         positionSecond: String, positionThrid: String,
         positionFourth: String, positionFifth: String,
         positionSixth: String ) {
-        
-        nameCocktail.text = name
-        instruction.text = instructions
-        glass.text = glassCocktail
-        
-        if firstIngredient == nil{
-            ingredientFirst.text = ""
-        } else {
-            ingredientFirst.text = positionFirst
+            
+            nameCocktail.text = name
+            instruction.text = instructions
+            glass.text = glassCocktail
+            
+            if firstIngredient == nil || firstIngredient == "" {
+                ingredientFirst.text = ""
+            } else {
+                ingredientFirst.text = positionFirst
+            }
+            if secondIngredient == nil || secondIngredient == "" {
+                ingredientSecond.text = ""
+            } else {
+                ingredientSecond.text = positionSecond
+            }
+            
+            if thridIngredient == nil || thridIngredient == "" {
+                ingredientThrid.text = ""
+            } else {
+                ingredientThrid.text = positionThrid
+            }
+            
+            if fourthIngredient == nil || fourthIngredient == "" {
+                ingredientFourth.text = ""
+            } else {
+                ingredientFourth.text = positionFourth
+            }
+            
+            if fifthIngredient == nil || fifthIngredient == "" {
+                ingredientFifth.text = ""
+            } else {
+                ingredientFifth.text = positionFifth
+            }
+            
+            if sixthIngredient == nil || sixthIngredient == "" {
+                ingredientSixth.text = ""
+            } else {
+                ingredientSixth.text = positionSixth
+            }
         }
-        if secondIngredient == nil{
-            ingredientSecond.text = ""
-        } else {
-            ingredientSecond.text = positionSecond
-        }
+    
+    private func successAlert() {
+        let alert = UIAlertController(
+            title: "Уже в избраном",
+            message: "Коктель не возможно добавить, он уже находить в избраном",
+            preferredStyle: .alert
+        )
         
-        if thridIngredient == nil {
-            ingredientThrid.text = ""
-        } else {
-            ingredientThrid.text = positionThrid
-        }
-        
-        if fourthIngredient == nil {
-            ingredientFourth.text = ""
-        } else {
-            ingredientFourth.text = positionFourth
-        }
-        
-        if fifthIngredient == nil {
-            ingredientFifth.text = ""
-        } else {
-            ingredientFifth.text = positionFifth
-        }
-        
-        if sixthIngredient == nil {
-            ingredientSixth.text = ""
-        } else {
-            ingredientSixth.text = positionSixth
-        }
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
     }
 }

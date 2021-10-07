@@ -52,7 +52,7 @@ class FavoritesCocktailViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let character = cocktails[indexPath.row]
-        let detailVC = segue.destination as! DetailVC
+        guard let detailVC = segue.destination as? DetailVC else { return }
         detailVC.indetifaerDetaiOnSegue = false
         detailVC.favoritesDetail = character
     }
