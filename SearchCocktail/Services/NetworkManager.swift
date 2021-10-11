@@ -14,8 +14,8 @@ class NetworkManager {
     
     private init() {}
     
-    func fetchData(from query: String, with complition: @escaping (Cocktail) -> Void) {
-        guard let url = URL(string: api + query) else { return }
+    func fetchData(string: String, with complition: @escaping (Cocktail) -> Void) {
+        guard let url = URL(string: api + string) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
@@ -33,8 +33,8 @@ class NetworkManager {
             
         }.resume()
     }
-    func fetchCharacter(from url: String, completion: @escaping(Drink) -> Void) {
-        guard let url = URL(string: url) else { return }
+    func fetchCharacter(completion: @escaping(Drink) -> Void) {
+        guard let url = URL(string: api) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
@@ -48,7 +48,7 @@ class NetworkManager {
                     completion(result)
                 }
             } catch let error {
-                print(error)
+                print(error.localizedDescription)
             }
         }.resume()
     }

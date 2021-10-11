@@ -36,16 +36,16 @@ extension StarterViewSearch: UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text?.count ?? 0 != 0  {
             performSegue(withIdentifier: "tableCocktails", sender: nil)
         }
         return true
     }
     
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
+     func textField(_ textField: UITextField,
+                           shouldChangeCharactersIn range: NSRange,
+                           replacementString string: String) -> Bool {
         let text = (textField.text! as NSString).replacingCharacters(in: range,
                                                                      with: string)
         if text.count != 0 {

@@ -8,7 +8,7 @@
 import Foundation
 
 struct Cocktail: Decodable{
-    let drinks: [Drink]
+    var drinks: [Drink]
 }
 
 struct Drink:  Decodable {

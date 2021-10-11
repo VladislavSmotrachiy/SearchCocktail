@@ -32,13 +32,14 @@ class CocktailsCollectionController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.collectionView.reloadData()
         setupNavigationBar()
     }
     
     // MARK: UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-     isFiltering ? drinks.count : cocktail?.drinks.count ?? 0
+        isFiltering ? drinks.count : cocktail?.drinks.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -72,8 +73,8 @@ class CocktailsCollectionController: UICollectionViewController {
         
     }
     private func fetchData() {
-        NetworkManager.shared.fetchData(from: name) {  drink in
-            self.cocktail = drink
+        NetworkManager.shared.fetchData(string: name) { cocktail in
+            self.cocktail = cocktail
             self.setupNavigationBar()
             self.collectionView.reloadData()
         }
@@ -87,7 +88,7 @@ extension CocktailsCollectionController: UISearchResultsUpdating {
     }
     
     private func filterContentForSearchText(_ searchText: String) {
-        drinks = cocktail?.drinks.filter { chracter in
+      drinks = cocktail?.drinks.filter { chracter in
             chracter.nameDrink.lowercased().contains(searchText.lowercased())
         } ?? []
         collectionView.reloadData()

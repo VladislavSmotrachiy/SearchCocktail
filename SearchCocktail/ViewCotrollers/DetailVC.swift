@@ -23,7 +23,6 @@ class DetailVC: UIViewController {
             detailImage.layer.cornerRadius = detailImage.frame.width / 2
         }
     }
-    
     @IBOutlet var buttonFavorites: UIButton!
     var drinkDetail: Drink!
     var favoritesDetail: FavoritesCocktail!
@@ -36,7 +35,7 @@ class DetailVC: UIViewController {
     }
     
     @IBAction func buttonAddToFavorites(_ sender: UIButton) {
-        let c = FavoritesCocktail.init(
+        let cocktailFavorites = FavoritesCocktail.init(
             id: drinkDetail?.id ?? "",
             nameDrink: drinkDetail?.nameDrink ?? "" ,
             drinkAlternate: drinkDetail?.drinkAlternate ?? "",
@@ -64,13 +63,13 @@ class DetailVC: UIViewController {
         )
         
         if StorageManager.shared.fetchFavorites().contains(where: { a in
-            a.id == c.id
+            a.id == cocktailFavorites.id
         }) {
             sender.tintColor = .red
             successAlert()
             print(isButtonHeart)
         } else {
-            StorageManager.shared.save(contact: c)
+            StorageManager.shared.save(contact: cocktailFavorites)
             sender.tintColor = .red
             isButtonHeart.toggle()
         }
@@ -95,7 +94,6 @@ class DetailVC: UIViewController {
     }
     
     // MARK: - FatchDetails
-    
     
     private func details(){
         if indetifaerDetaiOnSegue {
@@ -122,7 +120,7 @@ class DetailVC: UIViewController {
                 buttonFavorites.tintColor = .red
             }
         } else {
-            detailImage.fetchImage(from: favoritesDetail.images ?? "")
+         detailImage.fetchImage(from: favoritesDetail.images ?? "")
             setupNavigationBar(title: favoritesDetail.nameDrink ?? "")
             fatchDetails(name: favoritesDetail.nameDrink ?? "",
                          instructions: favoritesDetail.instructions ?? "",
@@ -139,12 +137,8 @@ class DetailVC: UIViewController {
                          positionFourth: favoritesDetail.fourthPosition,
                          positionFifth: favoritesDetail.fifthPosition,
                          positionSixth: favoritesDetail.sixthPosition)
-            if StorageManager.shared.fetchFavorites().contains(where: { a in
-                a.id == favoritesDetail.id
-            }) {
-                buttonFavorites.tintColor = .red
-                buttonFavorites.isUserInteractionEnabled = false
-            }
+            buttonFavorites.tintColor = .red
+            buttonFavorites.isUserInteractionEnabled = false
         }
     }
     private func fatchDetails(
@@ -200,7 +194,7 @@ class DetailVC: UIViewController {
     private func successAlert() {
         let alert = UIAlertController(
             title: "Уже в избраном",
-            message: "Коктель не возможно добавить, он уже находить в избраном",
+            message: "",
             preferredStyle: .alert
         )
         
