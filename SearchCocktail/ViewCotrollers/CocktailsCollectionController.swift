@@ -10,6 +10,15 @@ import UIKit
 
 class CocktailsCollectionController: UICollectionViewController {
     
+    var viewModel: CocktailsViewModelProtocol! {
+        didSet{
+            viewModel.fetchCourses {
+                self.collectionView.reloadData()
+                self.setupNavigationBar()
+            }
+        }
+    }
+    
     private var drinks: [Drink] = []
     private var cocktail: Cocktail?
     private let searchController = UISearchController(searchResultsController: nil)
@@ -25,27 +34,22 @@ class CocktailsCollectionController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ActivityIndicator.shared.animateActivity(title: "Загрузка", view: self.view, navigationItem: self.navigationItem)
+        viewModel = CocktailViewModel(api: name)
         collectionView.backgroundColor = .white
         setupSearchController()
-        fetchData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.collectionView.reloadData()
-        setupNavigationBar()
+        
     }
     
     // MARK: UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        isFiltering ? drinks.count : cocktail?.drinks.count ?? 0
+        viewModel.numberOfRows()
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CocktailCell
-        let result = isFiltering ? drinks[indexPath.row] : cocktail?.drinks[indexPath.row]
-        cell.configure(with: result)
+        cell.viewModel = viewModel.cellViewModel(at: indexPath)
         return cell
     }
     
@@ -110,15 +114,14 @@ extension CocktailsCollectionController {
     
     // MARK: - Navigation Bar
     private func setupNavigationBar() {
-        if isFiltering ? drinks.count == 0 : cocktail?.drinks.count ?? 0 == 0 {
-            titleName = "Ничего не найдено"
-        } else {
-            titleName = "Поиск по '\(name)' найдено \(isFiltering ? drinks.count : cocktail?.drinks.count ?? 0) совпадений"
+        if viewModel.numberOfRows() != 0 {
+            ActivityIndicator.shared.stopAnimating(navigationItem: navigationItem)
+            title = "Поиск по '\(name)' найдено \(viewModel.numberOfRows()) совпадений"
         }
         
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
-        titleLabel.text = titleName
+        titleLabel.text = title
         titleLabel.textColor = .black
         titleLabel.font = UIFont.systemFont(ofSize: 15)
         navigationItem.titleView = titleLabel

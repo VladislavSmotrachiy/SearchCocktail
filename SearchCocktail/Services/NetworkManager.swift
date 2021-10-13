@@ -33,8 +33,9 @@ class NetworkManager {
             
         }.resume()
     }
-    func fetchCharacter(completion: @escaping(Drink) -> Void) {
-        guard let url = URL(string: api) else { return }
+    func fetchCharacter(string: String, completion: @escaping(Drink) -> Void) {
+        
+        guard let url = URL(string: api + string) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
@@ -49,26 +50,6 @@ class NetworkManager {
                 }
             } catch let error {
                 print(error.localizedDescription)
-            }
-        }.resume()
-    }
-}
-
-class ImageManager {
-    static var shared = ImageManager()
-    
-    private init() {}
-    
-    func fetchImage(from url: URL, completion: @escaping(Data, URLResponse) -> Void) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, let response = response else {
-                print(error?.localizedDescription ?? "No Description")
-                return
-            }
-            guard url == response.url else { return }
-            
-            DispatchQueue.main.async {
-                completion(data, response)
             }
         }.resume()
     }
