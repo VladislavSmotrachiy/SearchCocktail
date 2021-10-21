@@ -21,7 +21,6 @@ class ActivityIndicator {
     
     func animateActivity(title: String, view: UIView, navigationItem: UINavigationItem) {
         //3
-        print("Начал")
         guard navigationItem.titleView == nil else { return }
         
         //4
@@ -54,6 +53,5 @@ class ActivityIndicator {
     func stopAnimating(navigationItem: UINavigationItem) {
         activityIndicator.stopAnimating()
         navigationItem.titleView = nil
-        print("Стоп")
     }
 }

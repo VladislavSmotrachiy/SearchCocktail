@@ -18,17 +18,10 @@ class CocktailCell: UICollectionViewCell {
     
     var viewModel: CocktailCellViewModelProtocol! {
         didSet{
+            viewModel.fetchImage(image: imageCocktail)
             nameCocktail.text = viewModel.drinkName
-            guard let imageDate = viewModel.imageData else {return}
-            imageCocktail.image = UIImage(data: imageDate)
         }
     }
-    
-    func configure(with result: Drink?) {
-        nameCocktail.text = result?.nameDrink
-        imageCocktail.fetchImage(from: result?.images ?? "" )
-    }
-    
 }
 
 

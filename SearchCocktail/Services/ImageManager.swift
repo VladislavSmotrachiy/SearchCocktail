@@ -27,9 +27,16 @@ class ImageManager {
         }.resume()
     }
     
-    func fetchImageData(from url: String?) -> Data? {
-        guard let urlImage = URL(string: url ?? "") else { return nil }
-        guard let imageData = try? Data(contentsOf: urlImage) else { return nil }
-        return imageData
+    func fetchImageData(from url: String?, completion: @escaping(Data) -> Void) {
+        guard let urlImage = URL(string: url ?? "") else { return}
+        URLSession.shared.dataTask(with: urlImage) { data, _ , error in
+            guard let data = data else {
+                print(error?.localizedDescription ?? "No Description")
+                return
+            }
+            DispatchQueue.main.async {
+                completion(data)
+            }
+        }.resume()
     }
 }

@@ -9,26 +9,43 @@ import Foundation
 
 protocol CocktailsViewModelProtocol: AnyObject {
     var drinks: [Drink] { get }
+    var filterDrink: [Drink] {get set}
     func fetchCourses(completion: @escaping() -> Void)
     func numberOfRows() -> Int
+    func numberOfRowsFilter() -> Int
     func cellViewModel(at indexPath: IndexPath) -> CocktailCellViewModelProtocol
-    init(api: String)
-//    func detailsViewModel(at indexPath: IndexPath) -> CourseDetailsViewModelProtocol
+    func cellViewModelFilter(at indexPath: IndexPath) -> CocktailCellViewModelProtocol
+    var string: String { get}
+    func detailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
 }
 
 class CocktailViewModel: CocktailsViewModelProtocol {
     
-    var cocktailNameForSearch: String
-    required init(api: String) {
-        self.cocktailNameForSearch = api
+    func detailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol {
+        let drinkDetails =  drinks[indexPath.row]
+        return DetailsViewModel(drink: drinkDetails)
     }
     
+    var string: String
+    var filterDrink: [Drink] = []
     var drinks: [Drink] = []
     
+    init(string: String) {
+        self.string = string
+    }
+    
+    func numberOfRowsFilter() -> Int {
+        filterDrink.count
+    }
+    
+    func cellViewModelFilter(at indexPath: IndexPath) -> CocktailCellViewModelProtocol {
+        let course =  filterDrink[indexPath.row]
+        return CocktailCellViewModel(drink: course)
+    }
+    
     func fetchCourses(completion: @escaping () -> Void) {
-        NetworkManager.shared.fetchData(string: cocktailNameForSearch) { drink in
+        NetworkManager.shared.fetchData(string: string) { drink in
             self.drinks = drink.drinks
-            
             completion()
         }
     }
@@ -38,12 +55,8 @@ class CocktailViewModel: CocktailsViewModelProtocol {
     }
     
     func cellViewModel(at indexPath: IndexPath) -> CocktailCellViewModelProtocol {
-        let course = drinks[indexPath.row]
+        let course =  drinks[indexPath.row]
         return CocktailCellViewModel(drink: course)
     }
     
-//    func detailsViewModel(at indexPath: IndexPath) -> CourseDetailsViewModelProtocol {
-//        let course = courses[indexPath.row]
-//        return CourseDetailsViewModel(course: course)
-//    }
 }

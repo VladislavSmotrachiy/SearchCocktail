@@ -9,22 +9,24 @@ import Foundation
 
 protocol CocktailCellViewModelProtocol {
     var drinkName: String { get }
-    var imageData: Data? { get }
-    init(drink: Drink)
+    var drink: Drink {get}
+    func fetchImage(image: CocktailImageView)
+   
 }
 
 class CocktailCellViewModel: CocktailCellViewModelProtocol {
+    func fetchImage(image: CocktailImageView) {
+        image.fetchImage(from: drink.images ?? "")
+    }
+    var drink: Drink
+    init(drink: Drink){
+        self.drink = drink
+    }
+        
     var drinkName: String {
         drink.nameDrink
     }
     
-    var imageData: Data? {
-        ImageManager.shared.fetchImageData(from: drink.images)
-    }
+
     
-    private let drink: Drink
-    
-    required init(drink: Drink) {
-        self.drink = drink
-    }
 }

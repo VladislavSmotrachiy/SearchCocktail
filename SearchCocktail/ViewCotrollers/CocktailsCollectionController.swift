@@ -18,9 +18,6 @@ class CocktailsCollectionController: UICollectionViewController {
             }
         }
     }
-    
-    private var drinks: [Drink] = []
-    private var cocktail: Cocktail?
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -30,42 +27,42 @@ class CocktailsCollectionController: UICollectionViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
     var name = ""
-    var titleName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ActivityIndicator.shared.animateActivity(title: "Загрузка", view: self.view, navigationItem: self.navigationItem)
-        viewModel = CocktailViewModel(api: name)
+        ActivityIndicator.shared.animateActivity(title: "Загрузка...", view: self.view, navigationItem: self.navigationItem)
+        viewModel = CocktailViewModel(string: name)
         collectionView.backgroundColor = .white
         setupSearchController()
-        
     }
     
     // MARK: UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.numberOfRows()
+        isFiltering ?  viewModel.numberOfRowsFilter() : viewModel.numberOfRows()
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CocktailCell
-        cell.viewModel = viewModel.cellViewModel(at: indexPath)
+        let result = isFiltering ? viewModel.cellViewModelFilter(at: indexPath) :
+        viewModel.cellViewModel(at: indexPath)
+        cell.viewModel = result
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let result = cocktail?.drinks[indexPath.row]
-        performSegue(withIdentifier: "show", sender: result)
+//        let result = viewModel.drinks[indexPath.row]
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let detailsModel = viewModel.detailsViewModel(at: indexPath)
+        performSegue(withIdentifier: "show", sender: detailsModel)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show" {
-            guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
-            let character = cocktail?.drinks[indexPath.first?.item ?? 0]
             guard let detailVC = segue.destination as? DetailVC else { return }
-            detailVC.drinkDetail = character
+            detailVC.viewModel = sender as? DetailsViewModelProtocol
             detailVC.indetifaerDetaiOnSegue = true
-            print("\(character?.nameDrink ?? "")")
         }
     }
     
@@ -74,14 +71,6 @@ class CocktailsCollectionController: UICollectionViewController {
     }
     @IBAction func backStarterView(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
-        
-    }
-    private func fetchData() {
-        NetworkManager.shared.fetchData(string: name) { cocktail in
-            self.cocktail = cocktail
-            self.setupNavigationBar()
-            self.collectionView.reloadData()
-        }
     }
 }
 
@@ -92,9 +81,9 @@ extension CocktailsCollectionController: UISearchResultsUpdating {
     }
     
     private func filterContentForSearchText(_ searchText: String) {
-      drinks = cocktail?.drinks.filter { chracter in
+        viewModel.filterDrink = viewModel.drinks.filter { chracter in
             chracter.nameDrink.lowercased().contains(searchText.lowercased())
-        } ?? []
+        }
         collectionView.reloadData()
     }
 }
@@ -122,19 +111,18 @@ extension CocktailsCollectionController {
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
         titleLabel.text = title
-        titleLabel.textColor = .black
-        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        titleLabel.textColor = .gray
+        titleLabel.font = UIFont.systemFont(ofSize: 14)
         navigationItem.titleView = titleLabel
         
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.backgroundColor = .white
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.backgroundColor = .white
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            
-            navigationController?.navigationBar.standardAppearance = navBarAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        navigationController?.navigationBar.standardAppearance = navBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
     // MARK: - SearchController
     private func setupSearchController() {
@@ -149,7 +137,7 @@ extension CocktailsCollectionController {
             textField.font = UIFont.boldSystemFont(ofSize: 17)
             textField.textColor = .darkGray
         }
-    } 
+    }
 }
 
 

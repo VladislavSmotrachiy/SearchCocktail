@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -212,14 +213,16 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="fST-vy-62Y">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="back" image="icon-back" id="cpz-WT-57w">
-                            <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-7"/>
-                            <inset key="largeContentSizeImageInsets" minX="0.0" minY="-1" maxX="0.0" maxY="0.0"/>
+                        <barButtonItem key="leftBarButtonItem" id="cpz-WT-57w">
+                            <imageReference key="image" image="chevron.backward" catalog="system" symbolScale="large"/>
+                            <inset key="largeContentSizeImageInsets" minX="0.0" minY="-1" maxX="0.0" maxY="1"/>
+                            <color key="tintColor" systemColor="linkColor"/>
                             <connections>
                                 <action selector="backStarterView:" destination="E45-5t-lV6" id="QHZ-Jy-4Fp"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="star" catalog="system" id="mJc-8d-0hh">
+                        <barButtonItem key="rightBarButtonItem" id="mJc-8d-0hh">
+                            <imageReference key="image" image="star" catalog="system" symbolScale="large"/>
                             <connections>
                                 <action selector="buttonActionSegueOnFavorites:" destination="E45-5t-lV6" id="kRC-EO-AHb"/>
                             </connections>
@@ -461,15 +464,18 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3Np-4W-IL9"/>
+        <segue reference="NCK-xB-CvI"/>
         <segue reference="INx-yq-iZV"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
-        <image name="icon-back" width="48" height="48"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
