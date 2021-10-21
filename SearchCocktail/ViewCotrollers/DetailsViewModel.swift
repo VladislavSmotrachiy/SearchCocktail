@@ -8,7 +8,6 @@
 import Foundation
 
 protocol DetailsViewModelProtocol: AnyObject {
-    var favoritesCocktail: FavoritesCocktail {get}
     var drink: Drink {get}
     
     // MARK: Lables

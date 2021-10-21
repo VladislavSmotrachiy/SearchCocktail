@@ -31,7 +31,7 @@ class CocktailsCollectionController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ActivityIndicator.shared.animateActivity(title: "Загрузка...", view: self.view, navigationItem: self.navigationItem)
-        viewModel = CocktailViewModel(string: name)
+        viewModel = FavoritesViewModel(string: name)
         collectionView.backgroundColor = .white
         setupSearchController()
     }

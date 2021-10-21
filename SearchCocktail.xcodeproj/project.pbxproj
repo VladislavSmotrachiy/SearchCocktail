@@ -12,7 +12,8 @@
 		52059A282715ADEC00E9B222 /* CocktailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52059A272715ADEC00E9B222 /* CocktailsViewModel.swift */; };
 		52059A2A2716E26100E9B222 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52059A292716E26100E9B222 /* ActivityIndicator.swift */; };
 		52059A2C2718D63700E9B222 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52059A2B2718D63700E9B222 /* DetailsViewModel.swift */; };
-		520B09742721C74E000E44F9 /* ViewModelFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520B09732721C74E000E44F9 /* ViewModelFavorites.swift */; };
+		520B09742721C74E000E44F9 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520B09732721C74E000E44F9 /* FavoritesViewModel.swift */; };
+		520B09762721CFAA000E44F9 /* FavoritesDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520B09752721CFAA000E44F9 /* FavoritesDetailsViewModel.swift */; };
 		5212DC9326A9A45500EA1DF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212DC9226A9A45500EA1DF3 /* AppDelegate.swift */; };
 		5212DC9526A9A45500EA1DF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212DC9426A9A45500EA1DF3 /* SceneDelegate.swift */; };
 		5212DC9726A9A45500EA1DF3 /* StarterViewSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212DC9626A9A45500EA1DF3 /* StarterViewSearch.swift */; };
@@ -37,7 +38,8 @@
 		52059A272715ADEC00E9B222 /* CocktailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailsViewModel.swift; sourceTree = "<group>"; };
 		52059A292716E26100E9B222 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		52059A2B2718D63700E9B222 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
-		520B09732721C74E000E44F9 /* ViewModelFavorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFavorites.swift; sourceTree = "<group>"; };
+		520B09732721C74E000E44F9 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		520B09752721CFAA000E44F9 /* FavoritesDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDetailsViewModel.swift; sourceTree = "<group>"; };
 		5212DC8F26A9A45500EA1DF3 /* SearchCocktail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchCocktail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5212DC9226A9A45500EA1DF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5212DC9426A9A45500EA1DF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,8 +148,9 @@
 				52059A272715ADEC00E9B222 /* CocktailsViewModel.swift */,
 				52C16A3026CE8DB300E5EDB1 /* DetailVC.swift */,
 				52059A2B2718D63700E9B222 /* DetailsViewModel.swift */,
+				520B09752721CFAA000E44F9 /* FavoritesDetailsViewModel.swift */,
 				528FEE2B26DD072500A822B0 /* FavoritesCocktailViewController.swift */,
-				520B09732721C74E000E44F9 /* ViewModelFavorites.swift */,
+				520B09732721C74E000E44F9 /* FavoritesViewModel.swift */,
 				5212DC9626A9A45500EA1DF3 /* StarterViewSearch.swift */,
 			);
 			path = ViewCotrollers;
@@ -256,7 +259,8 @@
 				5212DC9326A9A45500EA1DF3 /* AppDelegate.swift in Sources */,
 				528FEE2C26DD072500A822B0 /* FavoritesCocktailViewController.swift in Sources */,
 				52059A262715AA6B00E9B222 /* ImageManager.swift in Sources */,
-				520B09742721C74E000E44F9 /* ViewModelFavorites.swift in Sources */,
+				520B09762721CFAA000E44F9 /* FavoritesDetailsViewModel.swift in Sources */,
+				520B09742721C74E000E44F9 /* FavoritesViewModel.swift in Sources */,
 				52059A282715ADEC00E9B222 /* CocktailsViewModel.swift in Sources */,
 				528FEE2A26DD06E300A822B0 /* FavoritesCell.swift in Sources */,
 				52C16A3126CE8DB300E5EDB1 /* DetailVC.swift in Sources */,
