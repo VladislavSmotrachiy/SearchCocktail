@@ -11,7 +11,6 @@ protocol CocktailCellViewModelProtocol {
     var drinkName: String { get }
     var drink: Drink {get}
     func fetchImage(image: CocktailImageView)
-   
 }
 
 class CocktailCellViewModel: CocktailCellViewModelProtocol {
@@ -22,11 +21,8 @@ class CocktailCellViewModel: CocktailCellViewModelProtocol {
     init(drink: Drink){
         self.drink = drink
     }
-        
+    
     var drinkName: String {
         drink.nameDrink
     }
-    
-
-    
 }

@@ -31,7 +31,7 @@ class CocktailsCollectionController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ActivityIndicator.shared.animateActivity(title: "Загрузка...", view: self.view, navigationItem: self.navigationItem)
-        viewModel = FavoritesViewModel(string: name)
+        viewModel = CocktailViewModel(string: name)
         collectionView.backgroundColor = .white
         setupSearchController()
     }
@@ -51,7 +51,6 @@ class CocktailsCollectionController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let result = viewModel.drinks[indexPath.row]
         collectionView.deselectItem(at: indexPath, animated: true)
         let detailsModel = viewModel.detailsViewModel(at: indexPath)
         performSegue(withIdentifier: "show", sender: detailsModel)
@@ -62,7 +61,7 @@ class CocktailsCollectionController: UICollectionViewController {
         if segue.identifier == "show" {
             guard let detailVC = segue.destination as? DetailVC else { return }
             detailVC.viewModel = sender as? DetailsViewModelProtocol
-            detailVC.indetifaerDetaiOnSegue = true
+            detailVC.isSegue = true
         }
     }
     

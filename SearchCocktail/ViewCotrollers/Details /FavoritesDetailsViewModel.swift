@@ -8,7 +8,8 @@
 import Foundation
 
 protocol FavoritesDetailsViewModelProtocol: AnyObject {
-    var favorites: FavoritesCocktail {get}
+    
+    init(favorites: FavoritesCocktail)
     
     // MARK: Lables
     var nameCocktail: String { get }
@@ -27,101 +28,80 @@ protocol FavoritesDetailsViewModelProtocol: AnyObject {
     var fifthPosition: String {get}
     var sixthPosition: String {get}
     
-    // MARK: Check is Favorites
-    var isFavorite: Bool { get }
-    var isFavoritesHeart: Bool { get}
     
     // MARK: Methods
-    var viewModelDidChange: ((FavoritesDetailsViewModelProtocol) -> Void)? { get set }
     func fetchImage(image: CocktailImageView)
 }
 
 class FavoritesDetailsViewModel: FavoritesDetailsViewModelProtocol {
-    var favorites: FavoritesCocktail
-    
+
+  private let favoritess: FavoritesCocktail
     
     required init(favorites: FavoritesCocktail) {
-        self.favorites = favorites
-    }
-    
-    var isFavoritesHeart: Bool {
-        get {
-            StorageManager.shared.fetchFavorites().contains(where: { favorites in
-                favorites.id == favorites.id
-            })
-        }
-    }
-    
-    var viewModelDidChange: ((FavoritesDetailsViewModelProtocol) -> Void)?
-    
-    var isFavorite: Bool {
-        get {
-            StorageManager.shared.fetchFavorites().isEmpty
-        }
+        self.favoritess = favorites
     }
     
     var secondPosition: String {
-        favorites.secondPosition
+        favoritess.secondPosition
     }
     
     var thridPosition: String {
-        favorites.thridPosition
+        favoritess.thridPosition
     }
     
     var fourthPosition: String {
-        favorites.fourthPosition
+        favoritess.fourthPosition
     }
     
-    
     var fifthPosition: String {
-        favorites.fifthPosition
+        favoritess.fifthPosition
     }
     
     var sixthPosition: String {
-        favorites.sixthPosition
+        favoritess.sixthPosition
     }
     
     var firstPosition: String {
-        favorites.fifthPosition
+        favoritess.firstPosition
     }
     
     func fetchImage(image: CocktailImageView) {
-        image.fetchImage(from: favorites.images ?? "")
+        image.fetchImage(from: favoritess.images ?? "")
     }
     
     var nameCocktail: String {
-        favorites.nameDrink
+        favoritess.nameDrink ?? ""
     }
     
     var glass: String {
-        favorites.glass ?? ""
+        favoritess.glass ?? ""
     }
     
     var instruction: String {
-        favorites.instructions ?? ""
+        favoritess.instructions ?? ""
     }
     
     var ingredientFirst: String {
-        favorites.ingredientFirst ?? ""
+        favoritess.ingredientFirst ?? ""
     }
     
     var ingredientSecond: String {
-        favorites.ingredientSecond ?? ""
+        favoritess.ingredientSecond ?? ""
     }
     
     var ingredientThrid: String {
-        favorites.ingredientThrid ?? ""
+        favoritess.ingredientThrid ?? ""
     }
     
     var ingredientFourth: String {
-        favorites.ingredientFourth ?? ""
+        favoritess.ingredientFourth ?? ""
     }
     
     var ingredientFifth: String {
-        favorites.ingredientFifth ?? ""
+        favoritess.ingredientFifth ?? ""
     }
     
     var ingredientSixth: String {
-        favorites.ingredientSixth ?? ""
+        favoritess.ingredientSixth ?? ""
     }
 }

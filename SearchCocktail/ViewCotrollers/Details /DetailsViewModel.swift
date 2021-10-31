@@ -38,6 +38,7 @@ protocol DetailsViewModelProtocol: AnyObject {
 }
 
 class DetailsViewModel: DetailsViewModelProtocol {
+    
     var drink: Drink
     
     var favoritesCocktail: FavoritesCocktail {
@@ -126,7 +127,7 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     var firstPosition: String {
-        drink.fifthPosition
+        drink.firstPosition
     }
     
     func fetchImage(image: CocktailImageView) {

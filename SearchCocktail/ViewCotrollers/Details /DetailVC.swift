@@ -24,12 +24,20 @@ class DetailVC: UIViewController {
         }
     }
     
-    var viewModel: DetailsViewModelProtocol!
-    
     @IBOutlet var buttonFavorites: UIButton!
+    
+    var viewModel: DetailsViewModelProtocol!
+    var viewModelFavorites: FavoritesDetailsViewModelProtocol!
+    
+    var isSegue = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupFromTheNetwork()
+        if isSegue {
+            setupFromTheNetwork()
+        } else {
+            setupFromFavorites()
+        }
     }
     
     @IBAction func buttonAddToFavorites(_ sender: UIButton) {
@@ -59,8 +67,32 @@ class DetailVC: UIViewController {
     // MARK: - FatchDetails
     
     private func setStatusForFavoriteButton() {
-        buttonFavorites.tintColor = viewModel.isFavorite ? .gray : .red
+            buttonFavorites.tintColor = viewModel.isFavorite ? .gray : .red
     }
+    
+    private func setupFromFavorites() {
+        setupNavigationBar(title: viewModelFavorites.nameCocktail)
+        viewModelFavorites.fetchImage(image: detailImage)
+        fatchDetails(name: viewModelFavorites.nameCocktail,
+                     instructions: viewModelFavorites.instruction,
+                     glassCocktail: viewModelFavorites.glass,
+                     firstIngredient: viewModelFavorites.ingredientFirst,
+                     secondIngredient: viewModelFavorites.ingredientSecond,
+                     thridIngredient: viewModelFavorites.ingredientThrid,
+                     fourthIngredient: viewModelFavorites.ingredientFourth,
+                     fifthIngredient: viewModelFavorites.ingredientFifth,
+                     sixthIngredient: viewModelFavorites.ingredientSixth,
+                     positionFirst: viewModelFavorites.firstPosition,
+                     positionSecond: viewModelFavorites.secondPosition,
+                     positionThrid: viewModelFavorites.thridPosition,
+                     positionFourth: viewModelFavorites.fourthPosition,
+                     positionFifth: viewModelFavorites.fifthPosition,
+                     positionSixth: viewModelFavorites.sixthPosition)
+        buttonFavorites.tintColor = .red
+        buttonFavorites.isUserInteractionEnabled = false
+        buttonFavorites.alpha = 1.0
+    }
+    
     
     private func setupFromTheNetwork() {
         viewModel.viewModelDidChange = { [weak self] viewModel in

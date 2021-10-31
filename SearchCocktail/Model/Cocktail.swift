@@ -44,16 +44,16 @@ struct Drink:  Decodable {
    " \(ingredientSecond ?? ""): \(proportionSecond ?? "")"
     }
     var thridPosition: String {
-   " \(ingredientThrid ?? "its all"): \(proportionThrid ?? "its all")"
+   " \(ingredientThrid ?? ""): \(proportionThrid ?? "")"
     }
     var fourthPosition: String {
-        " \(ingredientFourth ?? "its all"): \(proportionFourth ?? "its all")"
+        " \(ingredientFourth ?? ""): \(proportionFourth ?? "")"
     }
     var fifthPosition: String {
-   " \(ingredientFifth ?? "its all"): \(proportionFifth ?? "its all")"
+   " \(ingredientFifth ?? ""): \(proportionFifth ?? "")"
     }
     var sixthPosition: String {
-   " \(ingredientSixth ?? "its all"): \(proportionSixth ?? "its all")"
+   " \(ingredientSixth ?? ""): \(proportionSixth ?? "")"
     }
 
     enum CodingKeys: String, CodingKey {

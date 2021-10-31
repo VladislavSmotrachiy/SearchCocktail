@@ -21,25 +21,25 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cocktailCell" id="WxY-Kk-brb" customClass="FavoritesCell" customModule="SearchCocktail" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="375" height="80.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cocktailCell" rowHeight="80" id="WxY-Kk-brb" customClass="FavoritesCell" customModule="SearchCocktail" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WxY-Kk-brb" id="Yj2-1Y-HyY">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eOv-Bo-esU">
-                                            <rect key="frame" x="10" y="10" width="345" height="60.5"/>
+                                            <rect key="frame" x="10" y="10" width="345" height="60"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L6Q-ES-YNc" customClass="CocktailImageView" customModule="SearchCocktail" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.5" width="60" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="BbX-2G-hdx"/>
-                                                        <constraint firstAttribute="height" constant="60" id="adr-Ig-2SH"/>
+                                                        <constraint firstAttribute="height" constant="60" id="B9h-Jb-nPE"/>
+                                                        <constraint firstAttribute="width" constant="60" id="WTk-Nz-rSr"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUn-L6-Pqv">
-                                                    <rect key="frame" x="70" y="19" width="275" height="23"/>
+                                                    <rect key="frame" x="70" y="18.5" width="275" height="23"/>
                                                     <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="16"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -57,7 +57,6 @@
                                 <connections>
                                     <outlet property="imageFavorites" destination="L6Q-ES-YNc" id="AUI-PK-sks"/>
                                     <outlet property="nameFavorites" destination="MUn-L6-Pqv" id="BaW-OX-NsS"/>
-                                    <segue destination="M9h-Zp-izo" kind="show" id="3uO-hm-qKI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -67,6 +66,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Favorites" id="R6i-nl-XzY"/>
+                    <connections>
+                        <segue destination="M9h-Zp-izo" kind="show" identifier="Show" id="GLH-vl-TlH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpr-mo-wAC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -283,11 +285,11 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="M9h-Zp-izo" customClass="DetailVC" customModule="SearchCocktail" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6gr-5W-Rms">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1180"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfA-M9-qUA">
-                                <rect key="frame" x="12" y="356" width="390" height="804"/>
+                                <rect key="frame" x="12" y="344" width="390" height="836"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="xrX-Je-lgb">
                                         <rect key="frame" x="20" y="40" width="300" height="533"/>
@@ -372,7 +374,7 @@
                                 </constraints>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THA-5p-ykS">
-                                <rect key="frame" x="47" y="322" width="320" height="34"/>
+                                <rect key="frame" x="47" y="310" width="320" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="v4i-3D-5vd"/>
                                 </constraints>
@@ -381,14 +383,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lgd-AF-PHB" customClass="CocktailImageView" customModule="SearchCocktail" customModuleProvider="target">
-                                <rect key="frame" x="80" y="82" width="220" height="220"/>
+                                <rect key="frame" x="80" y="70" width="220" height="220"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="220" id="TAL-x6-20C"/>
                                     <constraint firstAttribute="width" constant="220" id="h5J-VK-DBU"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bwy-ON-U5N">
-                                <rect key="frame" x="270" y="262" width="40" height="40"/>
+                                <rect key="frame" x="270" y="250" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="TcH-uL-b4y"/>
                                     <constraint firstAttribute="height" constant="40" id="sZk-NC-o0C"/>
@@ -427,7 +429,7 @@
                     <connections>
                         <outlet property="buttonFavorites" destination="Bwy-ON-U5N" id="oeA-oQ-Kry"/>
                         <outlet property="detailImage" destination="lgd-AF-PHB" id="Ss0-Cq-SEW"/>
-                        <outlet property="glass" destination="8ie-o4-BAA" id="geX-QI-Smb"/>
+                        <outlet property="glass" destination="8ie-o4-BAA" id="UkR-xM-998"/>
                         <outlet property="ingredientFifth" destination="8JD-ck-ydp" id="pRr-65-GrJ"/>
                         <outlet property="ingredientFirst" destination="u1s-E8-bsT" id="pyR-h8-bNw"/>
                         <outlet property="ingredientFourth" destination="Yc0-Kr-nxV" id="N5S-8X-ch2"/>
@@ -440,7 +442,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QYv-ux-QFa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5481.6000000000004" y="848.27586206896558"/>
+            <point key="canvasLocation" x="5413" y="1010"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="gcN-xO-Pgn">
@@ -465,7 +467,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="NCK-xB-CvI"/>
-        <segue reference="INx-yq-iZV"/>
+        <segue reference="GLH-vl-TlH"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
