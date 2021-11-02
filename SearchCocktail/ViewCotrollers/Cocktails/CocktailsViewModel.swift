@@ -17,9 +17,15 @@ protocol CocktailsViewModelProtocol: AnyObject {
     func cellViewModelFilter(at indexPath: IndexPath) -> CocktailCellViewModelProtocol
     var string: String { get}
     func detailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
+    func detailsViewModelFilter(at indexPath: IndexPath) -> DetailsViewModelProtocol
 }
 
 class CocktailViewModel: CocktailsViewModelProtocol {
+    func detailsViewModelFilter(at indexPath: IndexPath) -> DetailsViewModelProtocol {
+        let drinkDetails =  filterDrink[indexPath.row]
+        return DetailsViewModel(drink: drinkDetails)
+    }
+    
     
     func detailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol {
         let drinkDetails =  drinks[indexPath.row]
