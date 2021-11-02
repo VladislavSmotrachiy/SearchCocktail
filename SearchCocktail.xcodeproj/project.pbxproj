@@ -25,6 +25,7 @@
 		5212DCAB26B32B5F00EA1DF3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212DCAA26B32B5F00EA1DF3 /* NetworkManager.swift */; };
 		5212DCAD26B3798E00EA1DF3 /* CocktailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212DCAC26B3798E00EA1DF3 /* CocktailCell.swift */; };
 		5212DCAF26B37A9700EA1DF3 /* ImageCocktailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212DCAE26B37A9700EA1DF3 /* ImageCocktailView.swift */; };
+		5279EB092731F1AE0020110F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5279EB082731F1AE0020110F /* File.swift */; };
 		528FEE2A26DD06E300A822B0 /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528FEE2926DD06E300A822B0 /* FavoritesCell.swift */; };
 		528FEE2C26DD072500A822B0 /* FavoritesCocktailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528FEE2B26DD072500A822B0 /* FavoritesCocktailViewController.swift */; };
 		528FEE2F26DD0AA500A822B0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528FEE2E26DD0AA500A822B0 /* StorageManager.swift */; };
@@ -55,6 +56,7 @@
 		5212DCAA26B32B5F00EA1DF3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5212DCAC26B3798E00EA1DF3 /* CocktailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailCell.swift; sourceTree = "<group>"; };
 		5212DCAE26B37A9700EA1DF3 /* ImageCocktailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCocktailView.swift; sourceTree = "<group>"; };
+		5279EB082731F1AE0020110F /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		528FEE2926DD06E300A822B0 /* FavoritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
 		528FEE2B26DD072500A822B0 /* FavoritesCocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCocktailViewController.swift; sourceTree = "<group>"; };
 		528FEE2E26DD0AA500A822B0 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 			children = (
 				52059A292716E26100E9B222 /* ActivityIndicator.swift */,
 				52F774CD272EFAA40090F98D /* UIView.swift */,
+				5279EB082731F1AE0020110F /* File.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				5212DC9726A9A45500EA1DF3 /* StarterViewSearch.swift in Sources */,
 				5212DC9326A9A45500EA1DF3 /* AppDelegate.swift in Sources */,
 				528FEE2C26DD072500A822B0 /* FavoritesCocktailViewController.swift in Sources */,
+				5279EB092731F1AE0020110F /* File.swift in Sources */,
 				52059A262715AA6B00E9B222 /* ImageManager.swift in Sources */,
 				520B09762721CFAA000E44F9 /* FavoritesDetailsViewModel.swift in Sources */,
 				520B09742721C74E000E44F9 /* FavoritesViewModel.swift in Sources */,
