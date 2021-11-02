@@ -52,7 +52,7 @@ class CocktailsCollectionController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let detailsModel = viewModel.detailsViewModel(at: indexPath)
+        let detailsModel = isFiltering ? viewModel.detailsViewModelFilter(at: indexPath): viewModel.detailsViewModel(at: indexPath)
         performSegue(withIdentifier: "show", sender: detailsModel)
         
     }
