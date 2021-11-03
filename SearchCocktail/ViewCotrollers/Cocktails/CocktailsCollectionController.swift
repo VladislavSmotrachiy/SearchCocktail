@@ -39,20 +39,19 @@ class CocktailsCollectionController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        isFiltering ?  viewModel.numberOfRowsFilter() : viewModel.numberOfRows()
+        viewModel.numberOfRows(bool: isFiltering)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CocktailCell
-        let result = isFiltering ? viewModel.cellViewModelFilter(at: indexPath) :
-        viewModel.cellViewModel(at: indexPath)
-        cell.viewModel = result
+        cell.viewModel = viewModel.cellViewModel(at: indexPath, bool: isFiltering)
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let detailsModel = isFiltering ? viewModel.detailsViewModelFilter(at: indexPath) : viewModel.detailsViewModel(at: indexPath)
+        let detailsModel = viewModel.detailsViewModel(at: indexPath, bool: isFiltering)
+        print("\(detailsModel.nameCocktail)")
         performSegue(withIdentifier: "show", sender: detailsModel)
         
     }
@@ -102,9 +101,9 @@ extension CocktailsCollectionController {
     
     // MARK: - Navigation Bar
     private func setupNavigationBar() {
-        if viewModel.numberOfRows() != 0 {
+        if viewModel.numberOfRows(bool: isFiltering) != 0 {
             ActivityIndicator.shared.stopAnimating(navigationItem: navigationItem)
-            title = "Поиск по '\(name)' найдено \(viewModel.numberOfRows()) совпадений"
+            title = "Поиск по '\(name)' найдено \(viewModel.numberOfRows(bool: isFiltering)) совпадений"
         }
         
         let titleLabel = UILabel()

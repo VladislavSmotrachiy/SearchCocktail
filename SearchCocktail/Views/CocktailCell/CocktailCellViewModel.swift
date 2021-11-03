@@ -24,5 +24,6 @@ class CocktailCellViewModel: CocktailCellViewModelProtocol {
     
     var drinkName: String {
         drink.nameDrink
+        
     }
 }

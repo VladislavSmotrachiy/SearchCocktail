@@ -11,24 +11,16 @@ protocol CocktailsViewModelProtocol: AnyObject {
     var drinks: [Drink] { get }
     var filterDrink: [Drink] {get set}
     func fetchCourses(completion: @escaping() -> Void)
-    func numberOfRows() -> Int
-    func numberOfRowsFilter() -> Int
-    func cellViewModel(at indexPath: IndexPath) -> CocktailCellViewModelProtocol
-    func cellViewModelFilter(at indexPath: IndexPath) -> CocktailCellViewModelProtocol
+    func numberOfRows(bool: Bool) -> Int
+    func cellViewModel(at indexPath: IndexPath, bool: Bool) -> CocktailCellViewModelProtocol
     var string: String { get}
-    func detailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
-    func detailsViewModelFilter(at indexPath: IndexPath) -> DetailsViewModelProtocol
+    func detailsViewModel(at indexPath: IndexPath, bool: Bool) -> DetailsViewModelProtocol
 }
 
 class CocktailViewModel: CocktailsViewModelProtocol {
-    func detailsViewModelFilter(at indexPath: IndexPath) -> DetailsViewModelProtocol {
-        let drinkDetails =  filterDrink[indexPath.row]
-        return DetailsViewModel(drink: drinkDetails)
-    }
-    
-    
-    func detailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol {
-        let drinkDetails =  drinks[indexPath.row]
+ 
+    func detailsViewModel(at indexPath: IndexPath, bool: Bool) -> DetailsViewModelProtocol {
+        let drinkDetails = bool ? filterDrink[indexPath.row] : drinks[indexPath.row]
         return DetailsViewModel(drink: drinkDetails)
     }
     
@@ -39,16 +31,7 @@ class CocktailViewModel: CocktailsViewModelProtocol {
     init(string: String) {
         self.string = string
     }
-    
-    func numberOfRowsFilter() -> Int {
-        filterDrink.count
-    }
-    
-    func cellViewModelFilter(at indexPath: IndexPath) -> CocktailCellViewModelProtocol {
-        let course =  filterDrink[indexPath.row]
-        return CocktailCellViewModel(drink: course)
-    }
-    
+ 
     func fetchCourses(completion: @escaping () -> Void) {
         NetworkManager.shared.fetchData(string: string) { drink in
             self.drinks = drink.drinks
@@ -56,12 +39,12 @@ class CocktailViewModel: CocktailsViewModelProtocol {
         }
     }
     
-    func numberOfRows() -> Int {
-        drinks.count
+    func numberOfRows(bool: Bool) -> Int {
+        bool ? filterDrink.count : drinks.count
     }
     
-    func cellViewModel(at indexPath: IndexPath) -> CocktailCellViewModelProtocol {
-        let course =  drinks[indexPath.row]
+    func cellViewModel(at indexPath: IndexPath, bool: Bool) -> CocktailCellViewModelProtocol {
+        let course = bool ? filterDrink[indexPath.row] : drinks[indexPath.row]
         return CocktailCellViewModel(drink: course)
     }
     

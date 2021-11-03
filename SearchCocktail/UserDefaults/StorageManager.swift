@@ -44,5 +44,4 @@ class StorageManager {
         guard let data = try? PropertyListEncoder().encode(result) else { return }
         try? data.write(to: archiveURL, options: .noFileProtection)
     }
-//    
 }
