@@ -11,13 +11,13 @@ import UIKit
 class CocktailsCollectionController: UICollectionViewController {
     
     var viewModel: CocktailsViewModelProtocol! {
-        didSet{
+        didSet {
             viewModel.fetchCourses {
                 self.collectionView.reloadData()
-                self.setupNavigationBar()
             }
         }
     }
+    
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -30,10 +30,33 @@ class CocktailsCollectionController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ActivityIndicator.shared.animateActivity(title: "Загрузка...", view: self.view, navigationItem: self.navigationItem)
         viewModel = CocktailViewModel(string: name)
+        ActivityIndicator.shared.animateActivity(title: "Загрузка...", view: self.view, navigationItem: self.navigationItem)
         collectionView.backgroundColor = .white
         setupSearchController()
+        fetchAlertError()
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.setupNavigationBar()
+    }
+
+    private func fetchAlertError() {
+     
+    }
+    
+    private func successAlert(title: Error) {
+        let alert = UIAlertController(
+            title: "\(title)",
+            message: "",
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
     }
     
     // MARK: UICollectionViewDataSource
@@ -101,9 +124,12 @@ extension CocktailsCollectionController {
     
     // MARK: - Navigation Bar
     private func setupNavigationBar() {
+        collectionView.reloadData()
         if viewModel.numberOfRows(bool: isFiltering) != 0 {
             ActivityIndicator.shared.stopAnimating(navigationItem: navigationItem)
             title = "Поиск по '\(name)' найдено \(viewModel.numberOfRows(bool: isFiltering)) совпадений"
+        } else {
+            title = "ничего не найдено"
         }
         
         let titleLabel = UILabel()

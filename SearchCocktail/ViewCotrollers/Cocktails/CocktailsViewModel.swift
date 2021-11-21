@@ -10,6 +10,7 @@ import Foundation
 protocol CocktailsViewModelProtocol: AnyObject {
     var drinks: [Drink] { get }
     var filterDrink: [Drink] {get set}
+
     func fetchCourses(completion: @escaping() -> Void)
     func numberOfRows(bool: Bool) -> Int
     func cellViewModel(at indexPath: IndexPath, bool: Bool) -> CocktailCellViewModelProtocol
@@ -18,12 +19,11 @@ protocol CocktailsViewModelProtocol: AnyObject {
 }
 
 class CocktailViewModel: CocktailsViewModelProtocol {
- 
+    
     func detailsViewModel(at indexPath: IndexPath, bool: Bool) -> DetailsViewModelProtocol {
         let drinkDetails = bool ? filterDrink[indexPath.row] : drinks[indexPath.row]
         return DetailsViewModel(drink: drinkDetails)
     }
-    
     var string: String
     var filterDrink: [Drink] = []
     var drinks: [Drink] = []
@@ -31,14 +31,24 @@ class CocktailViewModel: CocktailsViewModelProtocol {
     init(string: String) {
         self.string = string
     }
- 
-    func fetchCourses(completion: @escaping () -> Void) {
-        NetworkManager.shared.fetchData(string: string) { drink in
-            self.drinks = drink.drinks
-            completion()
-        }
-    }
     
+    func fetchCourses(completion: @escaping() -> Void)  {
+        do {
+            try NetworkManager.shared.fetchData(string: string) { drink in
+                switch drink {
+                case .success(let drink):
+                    self.drinks = drink.drinks
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        } catch  {
+            print(error)
+            print("я тут")
+        }
+        completion()
+    }
+ 
     func numberOfRows(bool: Bool) -> Int {
         bool ? filterDrink.count : drinks.count
     }

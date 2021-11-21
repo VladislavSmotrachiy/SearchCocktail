@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class ImageManager {
     static let shared = ImageManager()
     
