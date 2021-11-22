@@ -30,6 +30,7 @@ class CocktailsCollectionController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         viewModel = CocktailViewModel(string: name)
         ActivityIndicator.shared.animateActivity(title: "Загрузка...", view: self.view, navigationItem: self.navigationItem)
         collectionView.backgroundColor = .white
@@ -44,12 +45,18 @@ class CocktailsCollectionController: UICollectionViewController {
     }
 
     private func fetchAlertError() {
-     
+        if viewModel.checkError() {
+            successAlert(title: viewModel.errors()!)
+        } else {
+            viewModel.fetchCourses {
+                self.successAlert(title: self.viewModel.errors()!)
+            }
+        }
     }
     
     private func successAlert(title: Error) {
         let alert = UIAlertController(
-            title: "\(title)",
+            title: "\(String(describing: title))",
             message: "",
             preferredStyle: .alert
         )
