@@ -14,16 +14,14 @@ class NetworkManager {
     
     private init() {}
     
-    func fetchData(string: String, with complition: @escaping (Result<Cocktail, Error>) -> Void) throws  {
-        guard let url = URL(string: api + string) else { throw CoctailFetchError.invalidUrl }
+    func fetchData(searchName: String, with complition: @escaping (Result<Cocktail, Error>) -> Void) throws  {
+        guard let url = URL(string: api + searchName) else { throw CocktailFetchError.invalidUrl }
         
         URLSession.shared.dataTask(with: url) { (data, _ , error) in
-
-//            guard let response = response as? HTTPURLResponse else { return }
             
             if  let error = error {
                 print("\(error.localizedDescription)")
-                complition(.failure(CoctailFetchError.internetConnection))
+                complition(.failure(CocktailFetchError.internetConnection))
                 
             } else if let data = data {
                 do {
@@ -32,39 +30,18 @@ class NetworkManager {
                         complition(.success(cocktail))
                     }
                 } catch  {
-                    complition(.failure(CoctailFetchError.incorrectInput))
+                    complition(.failure(CocktailFetchError.incorrectInput))
                     print("я в блоке catch in networkemanager")
                 }
             } else {
                 print("я в else in networkemanager")
-                complition(.failure(CoctailFetchError.unknown))
-            }
-        }.resume()
-    }
-    
-    func fetchCharacter(string: String, completion: @escaping(Drink) -> Void) {
-        
-        guard let url = URL(string: api + string) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
-            guard let data = data else {
-                print(error?.localizedDescription ?? "no descripption")
-                return
-            }
-            
-            do {
-                let result = try JSONDecoder().decode(Drink.self, from: data)
-                DispatchQueue.main.async {
-                    completion(result)
-                }
-            } catch let error  {
-                print(error.localizedDescription)
+                complition(.failure(CocktailFetchError.unknown))
             }
         }.resume()
     }
 }
 
-enum CoctailFetchError: Error {
+enum CocktailFetchError: Error {
     case invalidUrl
     case unknown
     case incorrectInput
@@ -72,14 +49,13 @@ enum CoctailFetchError: Error {
 }
 
 // MARK: - Extention
-extension CoctailFetchError: CustomStringConvertible {
+extension CocktailFetchError: CustomStringConvertible {
     var description: String {
         switch self {
-        case .invalidUrl: return "не коректный ввод"
+        case .invalidUrl: return "Не коректный ввод"
         case .unknown: return "нет ответа"
-        case .incorrectInput: return "по твоему запросу ничего не нашлось"
-        case .internetConnection: return "Проблемы  ссервером"
+        case .incorrectInput: return "по твоему запросу ничего не найдено"
+        case .internetConnection: return "Проблемы с сервером или нет подключения к интерненту"
         }
     }
-
 }

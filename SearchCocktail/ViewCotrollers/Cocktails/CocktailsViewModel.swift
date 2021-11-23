@@ -10,10 +10,10 @@ import Foundation
 protocol CocktailsViewModelProtocol: AnyObject {
     var drinks: [Drink] { get }
     var filterDrink: [Drink] {get set}
-
-    func errors() -> Error?
+    var headingError: Error? { get set }
+    
     func checkError() -> Bool
-    func fetchCourses(completion: @escaping() -> Void)
+    func fetchCocktails(completion: @escaping() -> Void)
     func numberOfRows(bool: Bool) -> Int
     func cellViewModel(at indexPath: IndexPath, bool: Bool) -> CocktailCellViewModelProtocol
     var searchName: String { get}
@@ -22,24 +22,8 @@ protocol CocktailsViewModelProtocol: AnyObject {
 
 class CocktailViewModel: CocktailsViewModelProtocol {
     
-    var headlingError: Error? = nil
-    var bool = false
-    
-    func checkError() -> Bool {
-        if headlingError != nil {
-            bool = true
-        }
-        return bool
-    }
-        
-    func errors() -> Error?  {
-        headlingError
-    }
-
-    func detailsViewModel(at indexPath: IndexPath, bool: Bool) -> DetailsViewModelProtocol {
-        let drinkDetails = bool ? filterDrink[indexPath.row] : drinks[indexPath.row]
-        return DetailsViewModel(drink: drinkDetails)
-    }
+    private var isStatusError = false
+    var headingError: Error? = nil
     var searchName: String
     var filterDrink: [Drink] = []
     var drinks: [Drink] = []
@@ -48,31 +32,34 @@ class CocktailViewModel: CocktailsViewModelProtocol {
         self.searchName = string
     }
     
-    func fetchCourses(completion: @escaping() -> Void)  {
+    func checkError() -> Bool {
+        if headingError != nil {
+            isStatusError = true
+        }
+        return isStatusError
+    }
+    
+    func fetchCocktails(completion: @escaping() -> Void )  {
         do {
-            try NetworkManager.shared.fetchData(string: searchName) { drink in
+            try NetworkManager.shared.fetchData(searchName: searchName) { drink in
                 switch drink {
                 case .success(let drink):
-                    self.bool = false
+                    self.isStatusError = false
                     self.drinks = drink.drinks
                 case .failure(let error):
-                    switch error {
-                    default:
-                        self.headlingError = error
-                    }
-                    
+                    self.headingError = error
                     print("я тут")
-                    print(self.headlingError!)
+                    print(self.headingError!)
                 }
+                completion()
             }
         } catch  {
-            self.headlingError = error
+            self.headingError = error
             print(error)
-//            print("я тут")
+            completion()
         }
-        completion()
     }
- 
+    
     func numberOfRows(bool: Bool) -> Int {
         bool ? filterDrink.count : drinks.count
     }
@@ -80,5 +67,10 @@ class CocktailViewModel: CocktailsViewModelProtocol {
     func cellViewModel(at indexPath: IndexPath, bool: Bool) -> CocktailCellViewModelProtocol {
         let course = bool ? filterDrink[indexPath.row] : drinks[indexPath.row]
         return CocktailCellViewModel(drink: course)
+    }
+    
+    func detailsViewModel(at indexPath: IndexPath, bool: Bool) -> DetailsViewModelProtocol {
+        let drinkDetails = bool ? filterDrink[indexPath.row] : drinks[indexPath.row]
+        return DetailsViewModel(drink: drinkDetails)
     }
 }

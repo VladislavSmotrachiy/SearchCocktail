@@ -12,7 +12,8 @@ class CocktailsCollectionController: UICollectionViewController {
     
     var viewModel: CocktailsViewModelProtocol! {
         didSet {
-            viewModel.fetchCourses {
+            viewModel.fetchCocktails {
+                self.fetchAlertError()
                 self.collectionView.reloadData()
             }
         }
@@ -30,40 +31,15 @@ class CocktailsCollectionController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         viewModel = CocktailViewModel(string: name)
         ActivityIndicator.shared.animateActivity(title: "Загрузка...", view: self.view, navigationItem: self.navigationItem)
         collectionView.backgroundColor = .white
         setupSearchController()
-        fetchAlertError()
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.setupNavigationBar()
-    }
-
-    private func fetchAlertError() {
-        if viewModel.checkError() {
-            successAlert(title: viewModel.errors()!)
-        } else {
-            viewModel.fetchCourses {
-                self.successAlert(title: self.viewModel.errors()!)
-            }
-        }
-    }
-    
-    private func successAlert(title: Error) {
-        let alert = UIAlertController(
-            title: "\(String(describing: title))",
-            message: "",
-            preferredStyle: .alert
-        )
-        
-        let okAction = UIAlertAction(title: "OK", style: .default)
-        alert.addAction(okAction)
-        self.present(alert, animated: true)
     }
     
     // MARK: UICollectionViewDataSource
@@ -102,19 +78,6 @@ class CocktailsCollectionController: UICollectionViewController {
     }
 }
 
-// MARK: - UISearchResultsUpdating
-extension CocktailsCollectionController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
-    }
-    
-    private func filterContentForSearchText(_ searchText: String) {
-        viewModel.filterDrink = viewModel.drinks.filter { chracter in
-            chracter.nameDrink.lowercased().contains(searchText.lowercased())
-        }
-        collectionView.reloadData()
-    }
-}
 // MARK: - UICollectionViewDelegateFlowLayout
 extension CocktailsCollectionController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -127,7 +90,33 @@ extension CocktailsCollectionController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension CocktailsCollectionController {
+extension CocktailsCollectionController: UISearchResultsUpdating {
+    // MARK: - SearchController
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    private func filterContentForSearchText(_ searchText: String) {
+        viewModel.filterDrink = viewModel.drinks.filter { chracter in
+            chracter.nameDrink.lowercased().contains(searchText.lowercased())
+        }
+        collectionView.reloadData()
+    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.barTintColor = .white
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            textField.font = UIFont.boldSystemFont(ofSize: 17)
+            textField.textColor = .darkGray
+        }
+    }
     
     // MARK: - Navigation Bar
     private func setupNavigationBar() {
@@ -155,19 +144,25 @@ extension CocktailsCollectionController {
         navigationController?.navigationBar.standardAppearance = navBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
-    // MARK: - SearchController
-    private func setupSearchController() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
-        searchController.searchBar.barTintColor = .white
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-        
-        if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
-            textField.font = UIFont.boldSystemFont(ofSize: 17)
-            textField.textColor = .darkGray
+    
+    // MARK: - AlertError
+    
+    private func fetchAlertError() {
+        if viewModel.checkError() {
+            successAlert(title: viewModel.headingError!)
         }
+    }
+    
+    private func successAlert(title: Error) {
+        let alert = UIAlertController(
+            title: "\(String(describing: title))",
+            message: "",
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
     }
 }
 
