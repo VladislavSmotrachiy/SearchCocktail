@@ -39,8 +39,8 @@ class FavoritesCocktailViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            viewModel.delite(int: indexPath.row)
-            viewModel.delitFavorites(indexPath: indexPath)
+            viewModel.delete(int: indexPath.row)
+            viewModel.deleteRowsFavorites(indexPath: indexPath)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }

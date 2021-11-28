@@ -11,19 +11,19 @@ protocol FavoritesViewModelProtocol: AnyObject {
     var favorites: [FavoritesCocktail] { get set }
     
     func numberOfRows() -> Int
-    func delite(int: Int)
+    func delete(int: Int)
     func cellViewModel(at indexPath: IndexPath) -> FavoritesCellViewModelProtocol
     func detailsViewModel(at indexPath: IndexPath) -> FavoritesDetailsViewModelProtocol
-    func delitFavorites(indexPath: IndexPath)
+    func deleteRowsFavorites(indexPath: IndexPath)
 }
 
 class FavoritesViewModel: FavoritesViewModelProtocol {
     
-    func delite(int: Int) {
+    func delete(int: Int) {
         favorites.remove(at: int)
     }
     
-    func delitFavorites(indexPath: IndexPath) {
+    func deleteRowsFavorites(indexPath: IndexPath) {
         StorageManager.shared.deleteFavorites(at: indexPath.row)
     }
     

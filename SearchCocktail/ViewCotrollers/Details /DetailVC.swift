@@ -42,7 +42,7 @@ class DetailVC: UIViewController {
     
     @IBAction func buttonAddToFavorites(_ sender: UIButton) {
         viewModel.favoriteButtonPressed()
-        if !viewModel.isFavorite {
+        if !viewModel.buttonColorState {
             successAlert()
         }
     }
@@ -67,7 +67,7 @@ class DetailVC: UIViewController {
     // MARK: - FatchDetails
     
     private func setStatusForFavoriteButton() {
-            buttonFavorites.tintColor = viewModel.isFavorite ? .gray : .red
+            buttonFavorites.tintColor = viewModel.buttonColorState ? .gray : .red
     }
     
     private func setupFromFavorites() {
@@ -115,7 +115,7 @@ class DetailVC: UIViewController {
                      positionFourth: viewModel.fourthPosition,
                      positionFifth: viewModel.fifthPosition,
                      positionSixth: viewModel.sixthPosition)
-        if viewModel.isFavoritesHeart {
+        if viewModel.isFavoritesStateButton {
             buttonFavorites.tintColor = .red
         }
     }

@@ -10,15 +10,15 @@ import UIKit
 class StarterViewSearch: UIViewController {
     
     @IBOutlet weak var nameCocktail: UITextField!
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var transitionButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameCocktail?.delegate = self
         nameCocktail.returnKeyType = .done
         nameCocktail.enablesReturnKeyAutomatically = true
-        button?.isUserInteractionEnabled = false
-        button?.alpha = 0.5
+        transitionButton?.isUserInteractionEnabled = false
+        transitionButton?.alpha = 0.5
         self.view.addBackground()
     }
     
@@ -49,11 +49,11 @@ extension StarterViewSearch: UITextFieldDelegate {
         let text = (textField.text! as NSString).replacingCharacters(in: range,
                                                                      with: string)
         if text.count != 0 {
-            button?.alpha = 1.0
-            button?.isUserInteractionEnabled = true
+            transitionButton?.alpha = 1.0
+            transitionButton?.isUserInteractionEnabled = true
         } else {
-            button?.alpha = 0.5
-            button?.isUserInteractionEnabled = false
+            transitionButton?.alpha = 0.5
+            transitionButton?.isUserInteractionEnabled = false
         }
         return true
     }

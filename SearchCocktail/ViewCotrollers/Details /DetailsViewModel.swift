@@ -28,8 +28,8 @@ protocol DetailsViewModelProtocol: AnyObject {
     var sixthPosition: String {get}
     
     // MARK: Check is Favorites
-    var isFavorite: Bool { get }
-    var isFavoritesHeart: Bool { get}
+    var buttonColorState: Bool { get }
+    var isFavoritesStateButton: Bool { get}
     
     // MARK: Methods
     var viewModelDidChange: ((DetailsViewModelProtocol) -> Void)? { get set }
@@ -39,9 +39,7 @@ protocol DetailsViewModelProtocol: AnyObject {
 
 class DetailsViewModel: DetailsViewModelProtocol {
     
-    var drink: Drink
-    
-    var favoritesCocktail: FavoritesCocktail {
+    private var favoritesCocktail: FavoritesCocktail {
         FavoritesCocktail.init(
             id: drink.id ?? "",
             nameDrink: drink.nameDrink,
@@ -70,11 +68,17 @@ class DetailsViewModel: DetailsViewModelProtocol {
         )
     }
     
-    required init(drink: Drink) {
-        self.drink = drink
+    var drink: Drink
+    var viewModelDidChange: ((DetailsViewModelProtocol) -> Void)?
+    var buttonColorState: Bool {
+        get {
+            StorageManager.shared.fetchFavorites().isEmpty
+        } set {
+            setFavorites()
+        }
     }
     
-    var isFavoritesHeart: Bool {
+    var isFavoritesStateButton: Bool {
         get {
             StorageManager.shared.fetchFavorites().contains(where: { favorites in
                 favorites.id == drink.id
@@ -82,18 +86,12 @@ class DetailsViewModel: DetailsViewModelProtocol {
         }
     }
     
-    var viewModelDidChange: ((DetailsViewModelProtocol) -> Void)?
-    
-    func favoriteButtonPressed() {
-        isFavorite.toggle()
+    required init(drink: Drink) {
+        self.drink = drink
     }
     
-    var isFavorite: Bool {
-        get {
-            StorageManager.shared.fetchFavorites().isEmpty
-        } set {
-            setFavorites()
-        }
+    func favoriteButtonPressed() {
+        buttonColorState.toggle()
     }
     
     private func setFavorites(){
