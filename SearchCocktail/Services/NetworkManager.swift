@@ -52,8 +52,8 @@ enum CocktailFetchError: Error {
 extension CocktailFetchError: CustomStringConvertible {
     var description: String {
         switch self {
-        case .invalidUrl: return "Не коректный ввод"
-        case .unknown: return "нет ответа"
+        case .invalidUrl: return "Некорректный ввод, есть недопустимые символы"
+        case .unknown: return "Нет ответа, подожди мы скоро это исправим"
         case .incorrectInput: return "по твоему запросу ничего не найдено"
         case .internetConnection: return "Проблемы с сервером или нет подключения к интерненту"
         }
